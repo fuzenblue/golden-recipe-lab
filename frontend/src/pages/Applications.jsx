@@ -1,182 +1,121 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAppSelector } from '../hooks';
+import BottomNav from '../components/BottomNav';
+import Button from '../components/ui/Button';
+import { Clipboard, FileX } from 'lucide-react';
 
-const positions = [
-  {
-    level: 'assistant',
-    title: 'ผู้ช่วยศาสตราจารย์',
-    subtitle: 'Assistant Professor',
-    icon: 'fa-graduation-cap',
-    requirements: 'คุณสมบัติ: ปริญญาเอก + ผลงาน 2 ชิ้น',
-  },
-  {
-    level: 'associate',
-    title: 'รองศาสตราจารย์',
-    subtitle: 'Associate Professor',
-    icon: 'fa-chart-line',
-    requirements: 'คุณสมบัติ: ปริญญาเอก + ผลงาน 5 ชิ้น + ประสบการณ์',
-  },
-  {
-    level: 'full',
-    title: 'ศาสตราจารย์',
-    subtitle: 'Professor',
-    icon: 'fa-star',
-    requirements: 'คุณสมบัติ: ปริญญาเอก + ผลงาน 10 ชิ้น + ประสบการณ์',
-  },
-];
-
-const Applications = () => {
+function Applications() {
   const navigate = useNavigate();
-  const { items: applications } = useAppSelector((state) => state.applications);
-  const [activeTab, setActiveTab] = useState('active');
-  const [selected, setSelected] = useState('');
+  const [selectedPosition, setSelectedPosition] = useState(null);
 
-  const activeApps = applications.filter(a => !['approved', 'rejected'].includes(a.status));
-  const pastApps = applications.filter(a => ['approved', 'rejected'].includes(a.status));
+  const positions = [
+    {
+      id: 'assistant',
+      title: 'ผู้ช่วยศาสตราจารย์ (Assistant Professor)',
+      requirements: 'คุณสมบัติ: ปริญญาเอก + ผลงาน 2 ชิ้น',
+    },
+    {
+      id: 'associate',
+      title: 'รองศาสตราจารย์ (Associate Professor)',
+      requirements: 'คุณสมบัติ: ปริญญาเอก + ผลงาน 5 ชิ้น + ประสบการณ์',
+    },
+    {
+      id: 'professor',
+      title: 'ศาสตราจารย์ (Professor)',
+      requirements: 'คุณสมบัติ: ปริญญาเอก + ผลงาน 10 ชิ้น + ประสบการณ์',
+    },
+  ];
 
-  const getStatusColor = (status) => {
-    if (status === 'approved') return 'badge-success';
-    if (status === 'rejected') return 'badge-error';
-    if (status === 'reviewing') return 'badge-warning';
-    return 'badge-primary';
-  };
-
-  const getStatusIcon = (status) => {
-    if (status === 'approved') return 'fa-check-circle';
-    if (status === 'rejected') return 'fa-times-circle';
-    if (status === 'submitted') return 'fa-paper-plane';
-    if (status === 'reviewing') return 'fa-magnifying-glass';
-    return 'fa-file';
+  const handleStartApplication = () => {
+    if (selectedPosition) {
+      navigate(`/application/step1?position=${selectedPosition}`);
+    }
   };
 
   return (
-    <>
-      <div className="flex items-center justify-between">
-        <h1 className="text-lg font-bold">ประวัติการสมัคร</h1>
-        <span className="text-caption text-base-content/50">Applications</span>
-      </div>
-
-      <div className="flex gap-1 bg-base-100 rounded-box p-1 border border-base-300">
-        {['active', 'history'].map((tab) => (
-          <button
-            key={tab}
-            onClick={() => setActiveTab(tab)}
-            className={`flex-1 py-2 px-3 rounded-lg text-sm font-medium transition-all ${
-              activeTab === tab
-                ? 'bg-primary text-white shadow-sm'
-                : 'text-base-content/60 hover:text-base-content'
-            }`}
-          >
-            {tab === 'active' ? 'เลือกตำแหน่ง' : 'ประวัติ'}
-            <span className="ml-1 text-xs">
-              ({tab === 'active' ? activeApps.length : pastApps.length})
-            </span>
-          </button>
-        ))}
-      </div>
-
-      {activeTab === 'active' ? (
-        <div className="space-y-3">
-          <p className="text-sm text-base-content/60">
-            <i className="fa-solid fa-clipboard-list mr-1"></i> เลือกตำแหน่งที่ต้องการสมัคร / Select Position to Apply
-          </p>
-          {positions.map((pos) => (
-            <button
-              key={pos.level}
-              onClick={() => setSelected(pos.level)}
-              className={`w-full text-left bg-base-100 rounded-box border p-4 transition-all ${
-                selected === pos.level
-                  ? 'border-primary ring-1 ring-primary'
-                  : 'border-base-300 hover:border-primary/30'
-              }`}
-            >
-              <div className="flex items-center gap-3">
-                <div className={`w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 ${
-                  selected === pos.level ? 'bg-primary text-white' : 'bg-primary/10 text-primary'
-                }`}>
-                  <i className={`fa-solid ${pos.icon}`}></i>
-                </div>
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-2">
-                    {selected === pos.level && (
-                      <i className="fa-solid fa-circle-check text-primary text-xs"></i>
-                    )}
-                    <p className="font-medium text-sm">{pos.title}</p>
-                  </div>
-                  <p className="text-xs text-base-content/50">{pos.subtitle}</p>
-                  <p className="text-[10px] text-base-content/40 mt-0.5">{pos.requirements}</p>
-                </div>
-              </div>
-            </button>
-          ))}
-
-          <button
-            onClick={() => selected && navigate('/application/step1')}
-            className={`btn w-full text-btn ${
-              selected ? 'btn-primary' : 'btn-disabled'
-            }`}
-            disabled={!selected}
-          >
-            {selected ? 'เริ่มการสมัคร / Start Application' : 'กรุณาเลือกตำแหน่ง'}
-          </button>
-
-          <div className="pt-2">
-            <h2 className="text-sm font-semibold text-base-content/70 mb-2 flex items-center gap-1.5">
-              <i className="fa-solid fa-clock-rotate-left"></i> ประวัติการสมัคร / Application History
-            </h2>
-            {pastApps.length > 0 ? (
-              <div className="space-y-2">
-                {pastApps.map((app) => (
-                  <div key={app.id} className="bg-base-100 rounded-box border border-base-300 p-3 flex items-center justify-between">
-                    <div>
-                      <p className="text-sm font-medium">{app.position?.titleTh}</p>
-                      <p className="text-xs text-base-content/50">
-                        {app.submittedAt ? new Date(app.submittedAt).toLocaleDateString('th-TH') : '-'}
-                      </p>
-                    </div>
-                    <span className={`badge ${getStatusColor(app.status)} gap-1 badge-sm`}>
-                      <i className={`fa-solid ${getStatusIcon(app.status)} text-xs`}></i>
-                      {app.status}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <div className="bg-base-100 rounded-box border border-base-300 p-6 text-center">
-                <i className="fa-solid fa-inbox text-3xl text-base-content/20 mb-2"></i>
-                <p className="text-sm text-base-content/60">ไม่มีการสมัครงานที่ผ่านมา</p>
-                <p className="text-xs text-base-content/40">No previous applications</p>
-              </div>
-            )}
-          </div>
+    <div className="min-h-screen bg-[#F5F5F5] pb-20">
+      <header className="bg-white border-b border-[#E0E0E0] px-4 py-3">
+        <div className="max-w-[432px] mx-auto">
+          <h1 className="text-lg font-semibold text-[#333333]">
+            ประวัติการสมัคร / Applications
+          </h1>
         </div>
-      ) : (
-        <div className="space-y-2">
-          {pastApps.length > 0 ? (
-            pastApps.map((app) => (
-              <div key={app.id} className="bg-base-100 rounded-box border border-base-300 p-3">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-sm font-medium">{app.position?.titleTh}</p>
-                    <p className="text-xs text-base-content/50">
-                      {app.submittedAt ? new Date(app.submittedAt).toLocaleDateString('th-TH') : '-'}
+      </header>
+
+      <div className="max-w-[432px] mx-auto px-4 py-6 space-y-6">
+        <div className="bg-white rounded-lg shadow-sm border border-[#E0E0E0] p-4">
+          <div className="mb-4">
+            <h2 className="text-base font-semibold text-[#333333] flex items-center gap-2">
+              <Clipboard className="w-5 h-5" />
+              เลือกตำแหน่งที่ต้องการสมัคร
+            </h2>
+            <p className="text-sm text-[#999999]">Select Position to Apply</p>
+          </div>
+
+          <div className="space-y-3">
+            {positions.map((position) => (
+              <button
+                key={position.id}
+                onClick={() => setSelectedPosition(position.id)}
+                className={`w-full text-left p-4 rounded-lg border-2 transition-all ${
+                  selectedPosition === position.id
+                    ? 'border-[#0066CC] bg-[#E3F2FD]'
+                    : 'border-[#E0E0E0] bg-white hover:border-[#0066CC]/50'
+                }`}
+              >
+                <div className="flex items-start gap-3">
+                  <div
+                    className={`w-5 h-5 rounded-full border-2 flex-shrink-0 mt-0.5 flex items-center justify-center ${
+                      selectedPosition === position.id
+                        ? 'border-[#0066CC] bg-[#0066CC]'
+                        : 'border-[#E0E0E0]'
+                    }`}
+                  >
+                    {selectedPosition === position.id && (
+                      <div className="w-2 h-2 rounded-full bg-white" />
+                    )}
+                  </div>
+                  <div className="flex-1">
+                    <p className="font-semibold text-[#333333] mb-1">
+                      {position.title}
+                    </p>
+                    <p className="text-sm text-[#666666]">
+                      {position.requirements}
                     </p>
                   </div>
-                  <span className={`badge ${getStatusColor(app.status)} badge-sm`}>{app.status}</span>
                 </div>
-              </div>
-            ))
-          ) : (
-            <div className="bg-base-100 rounded-box border border-base-300 p-8 text-center">
-              <i className="fa-solid fa-inbox text-3xl text-base-content/20 mb-2"></i>
-              <p className="text-sm text-base-content/60">ไม่มีประวัติการสมัคร</p>
-            </div>
-          )}
+              </button>
+            ))}
+          </div>
         </div>
-      )}
-    </>
+
+        <Button
+          onClick={handleStartApplication}
+          disabled={!selectedPosition}
+          className="w-full bg-[#0066CC] hover:bg-[#0052A3] text-white disabled:bg-[#E0E0E0] disabled:text-[#999999] disabled:cursor-not-allowed"
+        >
+          เริ่มการสมัคร / Start Application
+        </Button>
+
+        <div className="bg-white rounded-lg shadow-sm border border-[#E0E0E0] p-6">
+          <h2 className="text-base font-semibold text-[#333333] mb-3 flex items-center gap-2">
+            <Clipboard className="w-5 h-5" />
+            ประวัติการสมัคร / Application History
+          </h2>
+
+          <div className="text-center py-8">
+            <div className="w-16 h-16 mx-auto mb-3 rounded-full bg-[#F5F5F5] flex items-center justify-center">
+              <FileX className="w-8 h-8 text-[#999999]" />
+            </div>
+            <p className="text-sm text-[#999999]">ไม่มีการสมัครงานที่ผ่านมา</p>
+            <p className="text-xs text-[#999999]">No previous applications</p>
+          </div>
+        </div>
+      </div>
+
+      <BottomNav />
+    </div>
   );
-};
+}
 
 export default Applications;

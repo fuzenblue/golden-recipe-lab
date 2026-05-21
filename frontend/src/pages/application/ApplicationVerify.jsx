@@ -1,135 +1,151 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAppSelector } from '../../hooks';
-import { getVC1Data, getVC2Data, getVC3Data } from '../../data/vcData';
+import { ArrowLeft, Send, Clipboard, FileText, Building2, Target } from 'lucide-react';
+import Button from '../../components/ui/Button';
+import Checkbox from '../../components/ui/Checkbox';
 
-const ApplicationVerify = () => {
+function ApplicationVerify() {
   const navigate = useNavigate();
   const { user } = useAppSelector((state) => state.auth);
-  const [confirmed, setConfirmed] = useState(true);
-  const [submitting, setSubmitting] = useState(false);
-  const vc1 = getVC1Data();
-  const vc2 = getVC2Data();
-  const vc3 = getVC3Data();
+  const [confirmed, setConfirmed] = useState(false);
+  const progress = 100;
 
   const handleSubmit = () => {
-    setSubmitting(true);
-    setTimeout(() => {
-      alert('คำร้องของคุณถูกส่งเรียบร้อยแล้ว\n\nข้อมูล VC1, VC2, VC3 ถูกส่งไปยัง Verifier เรียบร้อย');
+    if (confirmed) {
+      alert('ใบสมัครถูกส่งเรียบร้อยแล้ว!\nApplication submitted successfully!');
       navigate('/dashboard');
-    }, 1500);
+    }
   };
 
   return (
-    <>
-      <div className="flex items-center gap-3">
-        <button onClick={() => navigate('/application/step3')} className="btn btn-ghost btn-sm btn-circle">
-          <i className="fa-solid fa-arrow-left"></i>
-        </button>
-        <div className="flex-1">
-          <h1 className="text-base font-bold">ตรวจสอบและยืนยัน</h1>
-          <p className="text-caption text-base-content/50">← กลับ / Back &nbsp; 100%</p>
+    <div className="min-h-screen bg-[#F5F5F5]">
+      <header className="bg-white border-b border-[#E0E0E0] px-4 py-3">
+        <div className="max-w-[432px] mx-auto flex items-center justify-between">
+          <button
+            onClick={() => navigate(-1)}
+            className="flex items-center gap-2 text-[#0066CC] hover:text-[#0052A3]"
+          >
+            <ArrowLeft className="w-5 h-5" />
+            <span className="text-sm">กลับ / Back</span>
+          </button>
+          <div className="text-sm text-[#00AA00] font-medium">{progress}%</div>
         </div>
-      </div>
+      </header>
 
-      <div className="bg-base-100 rounded-box border border-base-300 p-4">
-        <div className="flex items-center justify-between mb-3">
-          <span className="text-sm font-semibold text-success flex items-center gap-1.5">
-            <i className="fa-solid fa-circle-check"></i>
-            พร้อมส่ง / Ready to Submit
-          </span>
-        </div>
-        <div className="w-full h-2 bg-base-200 rounded-full overflow-hidden">
-          <div className="h-full bg-success rounded-full" style={{ width: '100%' }}></div>
-        </div>
-      </div>
-
-      <div className="bg-gradient-to-r from-primary to-blue-600 rounded-box p-4 text-white">
-        <p className="text-xs opacity-70"><i className="fa-solid fa-clipboard-list mr-1"></i> สรุปคำขอ / Application Summary</p>
-        <p className="font-bold text-lg mt-1"><i className="fa-solid fa-bullseye mr-1"></i> ผู้ช่วยศาสตราจารย์</p>
-        <p className="text-xs opacity-70">Assistant Professor</p>
-      </div>
-
-      <div className="space-y-2">
-        <div className="bg-base-100 rounded-box border border-base-300 p-3.5">
+      <div className="max-w-[432px] mx-auto px-4 py-6 space-y-6">
+        <div className="bg-white rounded-lg shadow-sm border border-[#E0E0E0] p-4">
           <div className="flex items-center justify-between mb-2">
-            <div className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center text-primary">
-                <i className="fa-solid fa-id-card text-sm"></i>
+            <h2 className="text-base font-semibold text-[#333333]">
+              ตรวจสอบและยืนยัน / Review & Confirm
+            </h2>
+            <span className="text-sm text-[#00AA00] font-medium">✓ พร้อมส่ง</span>
+          </div>
+          <div className="w-full bg-[#00AA00]/20 rounded-full h-2">
+            <div className="bg-[#00AA00] h-2 rounded-full w-full" />
+          </div>
+        </div>
+
+        <div className="bg-white rounded-lg shadow-sm border border-[#E0E0E0] p-4">
+          <h3 className="font-semibold text-[#333333] mb-3 flex items-center gap-2">
+            <Clipboard className="w-5 h-5" />
+            สรุปคำขอ / Application Summary
+          </h3>
+
+          <div className="bg-[#0066CC]/5 border border-[#0066CC]/20 rounded-lg p-3 mb-4">
+            <p className="text-xs text-[#999999] mb-1 flex items-center gap-1">
+              <Target className="w-3 h-3" />
+              ตำแหน่งที่สมัคร
+            </p>
+            <p className="text-sm font-semibold text-[#0066CC]">ผู้ช่วยศาสตราจารย์</p>
+            <p className="text-xs text-[#999999]">Assistant Professor</p>
+          </div>
+
+          <div className="space-y-3">
+            <div className="border border-[#E0E0E0] rounded-lg p-3">
+              <div className="flex items-start justify-between mb-2">
+                <div className="flex items-center gap-2">
+                  <FileText className="w-4 h-4" />
+                  <span className="text-sm font-semibold text-[#333333]">VC1: ข้อมูลส่วนตัว</span>
+                </div>
+                <div className="flex items-center gap-1">
+                  <div className="w-2 h-2 rounded-full bg-[#00AA00]" />
+                  <span className="text-xs text-[#00AA00]">verified</span>
+                </div>
               </div>
-              <span className="text-sm font-medium">VC1: ข้อมูลส่วนตัว</span>
+              <p className="text-xs text-[#666666] pl-7">ดร.สมชาย ใจดี | ปริญญาเอก | ม.จุฬาฯ</p>
             </div>
-            <span className="badge badge-success badge-sm">● verified</span>
-          </div>
-          <p className="text-xs text-base-content/60 ml-10">
-            {vc1.firstname} {vc1.lastname} | {vc1.higher_education} | {vc1.university}
-          </p>
-        </div>
 
-        <div className="bg-base-100 rounded-box border border-base-300 p-3.5">
-          <div className="flex items-center justify-between mb-2">
-            <div className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-secondary/10 rounded-lg flex items-center justify-center text-secondary">
-                <i className="fa-solid fa-briefcase text-sm"></i>
+            <div className="border border-[#E0E0E0] rounded-lg p-3">
+              <div className="flex items-start justify-between mb-2">
+                <div className="flex items-center gap-2">
+                  <FileText className="w-4 h-4" />
+                  <span className="text-sm font-semibold text-[#333333]">VC2: ประวัติการทำงาน</span>
+                </div>
+                <div className="flex items-center gap-1">
+                  <div className="w-2 h-2 rounded-full bg-[#00AA00]" />
+                  <span className="text-xs text-[#00AA00]">verified</span>
+                </div>
               </div>
-              <span className="text-sm font-medium">VC2: ประวัติการทำงาน</span>
+              <p className="text-xs text-[#666666] pl-7">ผศ. | 10 ปี | คณะวิทยาศาสตร์ | เงินเดือน 65,000</p>
             </div>
-            <span className="badge badge-success badge-sm">● verified</span>
-          </div>
-          <p className="text-xs text-base-content/60 ml-10">
-            {vc2.current_position?.position} | {vc2.years_of_service?.years} ปี | {vc2.faculty}
-          </p>
-        </div>
 
-        <div className="bg-base-100 rounded-box border border-base-300 p-3.5">
-          <div className="flex items-center justify-between mb-2">
-            <div className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-success/10 rounded-lg flex items-center justify-center text-success">
-                <i className="fa-solid fa-newspaper text-sm"></i>
+            <div className="border border-[#E0E0E0] rounded-lg p-3">
+              <div className="flex items-start justify-between mb-2">
+                <div className="flex items-center gap-2">
+                  <FileText className="w-4 h-4" />
+                  <span className="text-sm font-semibold text-[#333333]">VC3: ผลงานวิชาการ</span>
+                </div>
+                <div className="flex items-center gap-1">
+                  <div className="w-2 h-2 rounded-full bg-[#00AA00]" />
+                  <span className="text-xs text-[#00AA00]">verified</span>
+                </div>
               </div>
-              <span className="text-sm font-medium">VC3: ผลงานวิชาการ</span>
+              <p className="text-xs text-[#666666] pl-7">5 ผลงาน | Scopus, IEEE, Springer</p>
             </div>
-            <span className="badge badge-success badge-sm">● verified</span>
-          </div>
-          <p className="text-xs text-base-content/60 ml-10">
-            {vc3.length} ผลงาน | Scopus, IEEE, Springer
-          </p>
-        </div>
-      </div>
-
-      <div className="bg-base-100 rounded-box border border-base-300 p-3.5">
-        <div className="flex items-center gap-2">
-          <div className="w-8 h-8 bg-warning/10 rounded-lg flex items-center justify-center text-warning">
-            <i className="fa-solid fa-building-columns text-sm"></i>
-          </div>
-          <div>
-            <p className="text-sm font-medium"><i className="fa-solid fa-building-columns mr-1"></i> ผู้ตรวจสอบ / Verifier</p>
-            <p className="text-xs text-base-content/60">{user?.institution || 'มหาวิทยาลัยศรีนครินทรวิโรฒ'}</p>
           </div>
         </div>
-      </div>
 
-      <div className="bg-base-100 rounded-box border border-base-300 p-4">
-        <label className="flex items-center gap-3 cursor-pointer">
-          <input
-            type="checkbox"
-            className="checkbox checkbox-primary"
+        <div className="bg-white rounded-lg shadow-sm border border-[#E0E0E0] p-4">
+          <div className="flex items-start gap-2">
+            <Building2 className="w-6 h-6 text-[#0066CC]" />
+            <div>
+              <p className="text-sm font-semibold text-[#333333]">ผู้ตรวจสอบ / Verifier</p>
+              <p className="text-sm text-[#666666]">
+                {user?.institution || 'มหาวิทยาลัยศรีนครินทรวิโรฒ'}
+              </p>
+              <p className="text-xs text-[#999999]">Srinakharinwirot University</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="flex items-start gap-3 p-4 bg-white rounded-lg border border-[#E0E0E0]">
+          <Checkbox
             checked={confirmed}
-            onChange={(e) => setConfirmed(e.target.checked)}
+            onCheckedChange={(checked) => setConfirmed(checked)}
+            className="mt-1"
           />
-          <span className="text-sm"><i className="fa-solid fa-check mr-1"></i> ข้าพเจ้ายืนยันให้ส่งข้อมูลนี้เป็น Verifiable Presentation (VP) ไปยังผู้ตรวจสอบ</span>
-        </label>
-      </div>
+          <label className="text-sm text-[#333333] flex-1 cursor-pointer" onClick={() => setConfirmed(!confirmed)}>
+            <span className="block font-medium">
+              ข้าพเจ้ายืนยันให้ส่งข้อมูลนี้เป็น Verifiable Presentation (VP) ไปยังผู้ตรวจสอบ
+            </span>
+            <span className="text-xs text-[#999999]">
+              I confirm to submit this data as Verifiable Presentation (VP) to the verifier
+            </span>
+          </label>
+        </div>
 
-      <button
-        onClick={handleSubmit}
-        className={`btn btn-primary btn-block text-btn ${submitting ? 'loading' : ''}`}
-        disabled={!confirmed || submitting}
-      >
-        {submitting ? 'กำลังส่ง...' : <><i className="fa-solid fa-paper-plane mr-1"></i> ส่งใบสมัคร / Submit Application</>}
-      </button>
-    </>
+        <Button
+          onClick={handleSubmit}
+          disabled={!confirmed}
+          className="w-full bg-[#00AA00] hover:bg-[#008800] text-white disabled:bg-[#E0E0E0] disabled:text-[#999999] disabled:cursor-not-allowed h-12 text-base font-semibold"
+        >
+          <Send className="w-5 h-5 mr-2" />
+          ส่งใบสมัคร / Submit Application
+        </Button>
+      </div>
+    </div>
   );
-};
+}
 
 export default ApplicationVerify;

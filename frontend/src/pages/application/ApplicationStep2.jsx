@@ -1,137 +1,145 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getVC2Data } from '../../data/vcData';
+import { ArrowLeft, Edit, Briefcase, Calendar, BookOpen, Clock } from 'lucide-react';
+import Button from '../../components/ui/Button';
+import Checkbox from '../../components/ui/Checkbox';
 
-const ApplicationStep2 = () => {
+function ApplicationStep2() {
   const navigate = useNavigate();
-  const vc2 = getVC2Data();
-  const [formData, setFormData] = useState(vc2);
-  const [isEditing, setIsEditing] = useState(false);
-  const [hasChanges, setHasChanges] = useState(false);
-  const [confirmed, setConfirmed] = useState(true);
+  const [confirmed, setConfirmed] = useState(false);
+  const progress = 50;
 
-  const handleChange = (field, value) => {
-    setFormData({ ...formData, [field]: value });
-    setHasChanges(true);
-  };
-
-  const handleSubmit = () => {
-    if (hasChanges) {
-      alert('ข้อมูลกำลังรอการตรวจสอบจากมหาวิทยาลัย กรุณารอการยืนยัน');
-    } else {
+  const handleNext = () => {
+    if (confirmed) {
       navigate('/application/step3');
     }
   };
 
   return (
-    <>
-      <div className="flex items-center gap-3">
-        <button onClick={() => navigate('/application/step1')} className="btn btn-ghost btn-sm btn-circle">
-          <i className="fa-solid fa-arrow-left"></i>
-        </button>
-        <div className="flex-1">
-          <h1 className="text-base font-bold">ขั้นตอนที่ 2/4</h1>
-          <p className="text-caption text-base-content/50">← กลับ / Back &nbsp; 50%</p>
-        </div>
-      </div>
-
-      <div className="bg-base-100 rounded-box border border-base-300 p-4">
-        <div className="flex items-center justify-between mb-3">
-          <span className="text-sm font-semibold">VC2: ประวัติการทำงาน / Work History</span>
-        </div>
-        <div className="w-full h-2 bg-base-200 rounded-full overflow-hidden">
-          <div className="h-full bg-primary rounded-full" style={{ width: '50%' }}></div>
-        </div>
-      </div>
-
-      <div className="bg-base-100 rounded-box border border-base-300 p-4 shadow-sm">
-        <div className="flex items-center justify-between mb-3">
-          <span className="flex items-center gap-2">
-            <i className="fa-solid fa-briefcase text-secondary"></i>
-            <span className="font-medium text-sm">ตำแหน่งปัจจุบัน</span>
-          </span>
+    <div className="min-h-screen bg-[#F5F5F5]">
+      <header className="bg-white border-b border-[#E0E0E0] px-4 py-3">
+        <div className="max-w-[432px] mx-auto flex items-center justify-between">
           <button
-            onClick={() => setIsEditing(!isEditing)}
-            className={`btn btn-xs ${isEditing ? 'btn-success' : 'btn-outline'}`}
+            onClick={() => navigate(-1)}
+            className="flex items-center gap-2 text-[#0066CC] hover:text-[#0052A3]"
           >
-            <i className={`fa-solid ${isEditing ? 'fa-floppy-disk' : 'fa-pen'} mr-1`}></i>
-            {isEditing ? 'บันทึก' : 'แก้ไข/Edit'}
+            <ArrowLeft className="w-5 h-5" />
+            <span className="text-sm">กลับ / Back</span>
           </button>
+          <div className="text-sm text-[#999999]">{progress}%</div>
         </div>
+      </header>
 
-        <div className="space-y-3 text-sm">
-          <div className="flex justify-between">
-            <span className="text-base-content/60">ตำแหน่ง:</span>
-            <span className="font-medium">{formData.current_position?.position}</span>
+      <div className="max-w-[432px] mx-auto px-4 py-6 space-y-6">
+        <div className="bg-white rounded-lg shadow-sm border border-[#E0E0E0] p-4">
+          <div className="flex items-center justify-between mb-2">
+            <h2 className="text-base font-semibold text-[#333333]">ขั้นตอนที่ 2/4</h2>
+            <span className="text-sm text-[#999999]">VC2: ประวัติการทำงาน</span>
           </div>
-          <div className="flex justify-between">
-            <span className="text-base-content/60">คณะ:</span>
-            <span>{formData.faculty}</span>
-          </div>
-          <div className="flex justify-between">
-            <span className="text-base-content/60">ภาควิชา:</span>
-            <span>{formData.department}</span>
-          </div>
-          <div className="flex justify-between">
-            <span className="text-base-content/60">เงินเดือน:</span>
-            <span>{formData.current_position?.salary} บาท</span>
+          <div className="w-full bg-[#E0E0E0] rounded-full h-2">
+            <div
+              className="bg-[#0066CC] h-2 rounded-full transition-all"
+              style={{ width: `${progress}%` }}
+            />
           </div>
         </div>
 
-        <div className="border-t border-base-200 mt-3 pt-3">
-          <p className="text-xs font-semibold text-base-content/60 mb-2"><i className="fa-regular fa-calendar mr-1"></i> ระยะเวลาทำงาน</p>
-          <div className="space-y-1 text-sm">
-            <div className="flex justify-between">
-              <span className="text-base-content/60">เริ่มงาน:</span>
-              <span>{formData.appointed_lecturer?.appointment_date}</span>
+        <div className="bg-white rounded-lg shadow-sm border border-[#E0E0E0]">
+          <div className="flex items-center justify-between px-4 py-3 border-b border-[#E0E0E0]">
+            <div className="flex items-center gap-2">
+              <Briefcase className="w-5 h-5 text-[#666666]" />
+              <h3 className="font-semibold text-[#333333]">ตำแหน่งปัจจุบัน</h3>
             </div>
-            <div className="flex justify-between">
-              <span className="text-base-content/60">รวม:</span>
-              <span>{formData.years_of_service?.years} ปี {formData.years_of_service?.months} เดือน</span>
-            </div>
+            <button className="flex items-center gap-1 text-sm text-[#0066CC] hover:underline">
+              <Edit className="w-4 h-4" />
+              แก้ไข
+            </button>
           </div>
-        </div>
 
-        <div className="border-t border-base-200 mt-3 pt-3">
-          <p className="text-xs font-semibold text-base-content/60 mb-2"><i className="fa-solid fa-book mr-1"></i> ภาระงานสอน</p>
-          <div className="space-y-1">
-            {formData.teaching_work?.map((item, idx) => (
-              <div key={idx} className="text-sm flex justify-between">
-                <span>{item.subject_taught} ({item.name_code})</span>
-                <span className="text-base-content/50">{item.credits} หน่วยกิต</span>
+          <div className="p-4 space-y-4">
+            <div className="space-y-1">
+              <p className="text-sm text-[#333333]">
+                <span className="text-[#999999]">ตำแหน่ง:</span> ผู้ช่วยศาสตราจารย์
+              </p>
+              <p className="text-sm text-[#333333]">
+                <span className="text-[#999999]">คณะ:</span> คณะวิทยาศาสตร์
+              </p>
+              <p className="text-sm text-[#333333]">
+                <span className="text-[#999999]">ภาควิชา:</span> วิทยาการคอมพิวเตอร์
+              </p>
+              <p className="text-sm text-[#333333]">
+                <span className="text-[#999999]">เงินเดือน:</span> 65,000 บาท
+              </p>
+            </div>
+
+            <div className="h-px bg-[#E0E0E0]" />
+
+            <div>
+              <div className="flex items-center gap-2 mb-2">
+                <Calendar className="w-5 h-5 text-[#666666]" />
+                <p className="text-sm font-semibold text-[#333333]">ระยะเวลาทำงาน</p>
               </div>
-            ))}
+              <div className="pl-7 space-y-1">
+                <p className="text-sm text-[#333333]">
+                  <span className="text-[#999999]">เริ่มงาน:</span> 1 มิถุนายน 2559
+                </p>
+                <p className="text-sm text-[#333333]">
+                  <span className="text-[#999999]">รวม:</span> 10 ปี 11 เดือน
+                </p>
+              </div>
+            </div>
+
+            <div className="h-px bg-[#E0E0E0]" />
+
+            <div>
+              <div className="flex items-center gap-2 mb-2">
+                <BookOpen className="w-5 h-5 text-[#666666]" />
+                <p className="text-sm font-semibold text-[#333333]">ภาระงานสอน</p>
+              </div>
+              <div className="pl-7 space-y-1">
+                <p className="text-sm text-[#333333]">
+                  <span className="text-[#999999]">รายวิชา:</span> CS101, CS201, CS301
+                </p>
+                <p className="text-sm text-[#333333]">
+                  <span className="text-[#999999]">ชั่วโมง/สัปดาห์:</span> 12 ชั่วโมง
+                </p>
+              </div>
+            </div>
           </div>
-          <p className="text-xs text-base-content/40 mt-1">{formData.background_duties}</p>
         </div>
-      </div>
 
-      <div role="alert" className="alert bg-warning/10 border border-warning/20 text-sm">
-        <i className="fa-solid fa-clock text-warning"></i>
-        <span className="text-xs"><i className="fa-solid fa-hourglass-half mr-1"></i> หากแก้ไข จะต้องผ่านการยืนยันจากมหาวิทยาลัยอีกครั้ง</span>
-      </div>
+        <div className="bg-[#FF9900]/10 border border-[#FF9900] rounded-lg p-3">
+          <div className="flex items-start gap-2">
+            <Clock className="w-5 h-5 text-[#FF9900] flex-shrink-0" />
+            <div>
+              <p className="text-sm font-semibold text-[#FF9900]">รอการยืนยันจากมหาวิทยาลัย</p>
+              <p className="text-xs text-[#666666]">หากแก้ไข จะต้องผ่านการยืนยันจากมหาวิทยาลัยอีกครั้ง</p>
+            </div>
+          </div>
+        </div>
 
-      <div className="bg-base-100 rounded-box border border-base-300 p-4">
-        <label className="flex items-center gap-3 cursor-pointer">
-          <input
-            type="checkbox"
-            className="checkbox checkbox-primary"
+        <div className="flex items-start gap-3 p-4 bg-white rounded-lg border border-[#E0E0E0]">
+          <Checkbox
             checked={confirmed}
-            onChange={(e) => setConfirmed(e.target.checked)}
+            onCheckedChange={(checked) => setConfirmed(checked)}
+            className="mt-1"
           />
-          <span className="text-sm"><i className="fa-solid fa-check mr-1"></i> ข้าพเจ้ายืนยันว่าข้อมูลข้างต้นถูกต้อง</span>
-        </label>
-      </div>
+          <label className="text-sm text-[#333333] flex-1 cursor-pointer" onClick={() => setConfirmed(!confirmed)}>
+            <span className="block">ข้าพเจ้ายืนยันว่าข้อมูลข้างต้นถูกต้อง</span>
+            <span className="text-xs text-[#999999]">I confirm the above information is correct</span>
+          </label>
+        </div>
 
-      <button
-        onClick={handleSubmit}
-        className="btn btn-primary btn-block text-btn"
-        disabled={!confirmed}
-      >
-        {hasChanges ? 'ส่งข้อมูลเพื่อตรวจสอบ' : 'ถัดไป / Next Step →'}
-      </button>
-    </>
+        <Button
+          onClick={handleNext}
+          disabled={!confirmed}
+          className="w-full bg-[#0066CC] hover:bg-[#0052A3] text-white disabled:bg-[#E0E0E0] disabled:text-[#999999] disabled:cursor-not-allowed"
+        >
+          ถัดไป / Next Step →
+        </Button>
+      </div>
+    </div>
   );
-};
+}
 
 export default ApplicationStep2;

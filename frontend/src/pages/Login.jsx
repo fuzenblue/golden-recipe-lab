@@ -1,136 +1,118 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Eye, EyeOff, Building2, Mail, Lock } from 'lucide-react';
 import { useAppDispatch, useAppSelector } from '../hooks';
 import { login } from '../store/slices/authSlice';
-import { useNavigate } from 'react-router-dom';
+import Button from '../components/ui/Button';
+import Input from '../components/ui/Input';
+import Label from '../components/ui/Label';
 
-const Login = () => {
-  const dispatch = useAppDispatch();
+function Login() {
   const navigate = useNavigate();
-  const { isLoading, error } = useAppSelector((state) => state.auth);
+  const dispatch = useAppDispatch();
+  const { isLoading } = useAppSelector((state) => state.auth);
   const [email, setEmail] = useState('demo@swu.ac.th');
   const [password, setPassword] = useState('demo123');
   const [showPassword, setShowPassword] = useState(false);
-  const [emailError, setEmailError] = useState('');
+  const [error, setError] = useState('');
 
-  const validateEmail = (value) => {
-    if (!value) return 'กรุณากรอกอีเมล';
-    if (!value.includes('@')) return 'รูปแบบอีเมลไม่ถูกต้อง';
-    return '';
-  };
-
-  const handleSubmit = async (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    const err = validateEmail(email);
-    if (err) { setEmailError(err); return; }
-    setEmailError('');
+    setError('');
+
+    if (!email || !password) {
+      setError('กรุณากรอกอีเมลและรหัสผ่าน');
+      return;
+    }
+
     const result = await dispatch(login({ email, password }));
     if (login.fulfilled.match(result)) {
       const hasPin = localStorage.getItem('hasPin');
       navigate(hasPin ? '/pin-verify' : '/pin-setup');
+    } else {
+      setError('อีเมลหรือรหัสผ่านไม่ถูกต้อง');
     }
   };
 
   return (
-    <div className="min-h-screen bg-base-100 flex flex-col max-w-mobile mx-auto">
-      <div className="flex-1 flex flex-col items-center justify-center px-6 py-8">
-        <div className="flex flex-col items-center mb-8">
-          <div className="w-20 h-20 bg-primary/10 rounded-2xl flex items-center justify-center mb-4">
-            <i className="fa-solid fa-building-columns text-4xl text-primary"></i>
+    <div className="min-h-screen bg-[#F5F5F5] flex flex-col items-center justify-center px-4">
+      <div className="w-full max-w-[432px] space-y-6">
+        <div className="text-center space-y-2">
+          <div className="w-16 h-16 mx-auto rounded-full bg-[#0066CC] flex items-center justify-center">
+            <Building2 className="w-8 h-8 text-white" />
           </div>
-          <h1 className="text-h2 text-center">Acard Wallet</h1>
-          <p className="text-body-sm text-base-content/60 text-center mt-1">
-            Present by Golden Recipe Lab
-          </p>
+          <h1 className="text-2xl font-bold text-[#333333]">GRL WALLET</h1>
+          <p className="text-sm text-[#999999]">Thai Academic Researcher Wallet</p>
         </div>
 
-        {error && (
-          <div role="alert" className="alert alert-error w-full max-w-sm mb-4">
-            <i className="fa-solid fa-circle-exclamation"></i>
-            <span>{error}</span>
-          </div>
-        )}
-
-        <form onSubmit={handleSubmit} className="w-full max-w-sm space-y-4">
-          <div className="form-control">
-            <label className="label">
-              <span className="label-text font-medium"><i className="fa-regular fa-envelope mr-1"></i> อีเมลสถาบัน / Email</span>
-            </label>
-            <input
-              type="email"
-              placeholder="demo@swu.ac.th"
-              className={`input input-bordered w-full ${emailError ? 'input-error' : ''}`}
-              value={email}
-              onChange={(e) => { setEmail(e.target.value); setEmailError(''); }}
-              autoComplete="email"
-            />
-            {emailError && (
-              <label className="label">
-                <span className="label-text-alt text-error">{emailError}</span>
-              </label>
-            )}
-          </div>
-
-          <div className="form-control">
-            <label className="label">
-              <span className="label-text font-medium"><i className="fa-solid fa-lock mr-1"></i> รหัสผ่าน / Password</span>
-            </label>
-            <div className="relative">
-              <input
-                type={showPassword ? 'text' : 'password'}
-                placeholder="••••••••"
-                className="input input-bordered w-full pr-10"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                autoComplete="current-password"
+        <div className="bg-white rounded-lg shadow-sm border border-[#E0E0E0] p-6 space-y-4">
+          <form onSubmit={handleLogin} className="space-y-4">
+            <div className="space-y-2">
+              <Label htmlFor="email" className="text-[#333333] flex items-center gap-2">
+                <Mail className="w-4 h-4" />
+                อีเมล / Email
+              </Label>
+              <Input
+                id="email"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="demo@swu.ac.th"
+                className="w-full bg-[#F5F5F5] border-[#E0E0E0] focus:border-[#0066CC] focus:ring-[#0066CC]"
               />
-              <button
-                type="button"
-                className="absolute right-3 top-1/2 -translate-y-1/2 btn btn-ghost btn-xs"
-                onClick={() => setShowPassword(!showPassword)}
-                tabIndex={-1}
-                aria-label={showPassword ? 'ซ่อนรหัสผ่าน' : 'แสดงรหัสผ่าน'}
-              >
-                <i className={`fa-regular ${showPassword ? 'fa-eye-slash' : 'fa-eye'}`}></i>
-              </button>
             </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="password" className="text-[#333333] flex items-center gap-2">
+                <Lock className="w-4 h-4" />
+                รหัสผ่าน / Password
+              </Label>
+              <div className="relative">
+                <Input
+                  id="password"
+                  type={showPassword ? 'text' : 'password'}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="********"
+                  className="w-full bg-[#F5F5F5] border-[#E0E0E0] focus:border-[#0066CC] focus:ring-[#0066CC] pr-10"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-[#999999] hover:text-[#333333]"
+                >
+                  {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                </button>
+              </div>
+            </div>
+
+            {error && (
+              <div className="bg-[#CC0000]/10 border border-[#CC0000] text-[#CC0000] px-4 py-2 rounded text-sm">
+                {error}
+              </div>
+            )}
+
+            <Button
+              type="submit"
+              disabled={isLoading}
+              className="w-full bg-[#0066CC] hover:bg-[#0052A3] text-white font-semibold"
+            >
+              {isLoading ? 'กำลังเข้า...' : 'เข้าสู่ระบบ / LOGIN'}
+            </Button>
+          </form>
+
+          <div className="text-center space-y-1 text-sm">
+            <button className="text-[#0066CC] hover:underline block w-full">
+              ลืมรหัสผ่าน? / Forgot Password?
+            </button>
+            <p className="text-[#999999] text-xs mt-4">
+              Demo: demo@swu.ac.th / demo123
+            </p>
           </div>
-
-          <button
-            type="submit"
-            className={`btn btn-primary w-full text-btn ${isLoading ? 'loading' : ''}`}
-            disabled={isLoading}
-          >
-            {isLoading ? 'กำลังเข้า...' : 'เข้าสู่ระบบ / LOGIN'}
-          </button>
-        </form>
-
-        <div className="flex flex-col items-center gap-2 mt-6 w-full max-w-sm">
-          <a href="#" className="text-sm text-primary hover:underline">
-            ลืมรหัสผ่าน? / Forgot Password?
-          </a>
         </div>
-
-        <div className="divider text-base-content/40 text-xs w-full max-w-sm my-6">
-          Demo Account
-        </div>
-
-        <div className="bg-base-200 rounded-box p-4 w-full max-w-sm text-sm">
-          <div className="flex justify-between items-center">
-            <span className="text-base-content/60"><i className="fa-regular fa-envelope mr-1"></i> Email:</span>
-            <span className="font-mono text-xs">demo@swu.ac.th</span>
-          </div>
-          <div className="flex justify-between items-center mt-2">
-            <span className="text-base-content/60"><i className="fa-solid fa-key mr-1"></i> Password:</span>
-            <span className="font-mono text-xs">demo123</span>
-          </div>
-        </div>
-
-        <p className="text-xs text-base-content/40 mt-6 text-center">
-          ลงทะเบียนครั้งแรก? — First time? Contact your institution
-        </p>
       </div>
     </div>
   );
-};
+}
 
 export default Login;
