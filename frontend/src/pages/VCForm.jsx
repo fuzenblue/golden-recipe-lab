@@ -560,5 +560,111 @@ function VCForm() {
     </div>
   );
 }
+if (vcType === 'vc3' && section.heading.name === 'sec_work_type') {
+  return (
+    <div key="sec_work_type" className="bg-white rounded-lg p-4 shadow-sm border border-[#E0E0E0] space-y-4">
+      <h3 className="text-sm font-bold text-[#0066CC] flex items-center gap-2 border-b border-[#E0E0E0] pb-2">
+        <i className="fa-solid fa-circle text-[6px]"></i>
+        ประเภทของผลงาน
+      </h3>
+      <div className="space-y-3">
+        <label className="flex items-start gap-2 cursor-pointer">
+          <input type="checkbox" checked={formData.research_group_1 === 'ใช่'} onChange={(e) => handleInputChange('research_group_1', e.target.checked ? 'ใช่' : '')} className="mt-1 w-4 h-4 rounded border-[#E0E0E0] text-[#0066CC] focus:ring-[#0066CC]" />
+          <span className="text-sm font-semibold text-[#333333]">กลุ่มที่ 1 งานวิจัย</span>
+        </label>
+        {formData.research_group_1 === 'ใช่' && (
+          <div className="ml-6 pl-3 border-l-2 border-[#0066CC]/30 space-y-2">
+            <p className="text-xs text-[#666666] font-medium">อยู่ในฐานข้อมูล:</p>
+            <label className="flex items-start gap-2 cursor-pointer">
+              <input type="checkbox" checked={formData.intl_approved === 'ใช่'} onChange={(e) => handleInputChange('intl_approved', e.target.checked ? 'ใช่' : '')} className="mt-0.5 w-4 h-4 rounded border-[#E0E0E0] text-[#0066CC] focus:ring-[#0066CC]" />
+              <span className="text-xs text-[#333333]">ระดับนานาชาติ ที่ ก.พ.อ. รับรอง</span>
+            </label>
+            <label className="flex items-start gap-2 cursor-pointer">
+              <input type="checkbox" checked={formData.mathscinet === 'ใช่'} onChange={(e) => handleInputChange('mathscinet', e.target.checked ? 'ใช่' : '')} className="mt-0.5 w-4 h-4 rounded border-[#E0E0E0] text-[#0066CC] focus:ring-[#0066CC]" />
+              <span className="text-xs text-[#333333]">MathsciNet</span>
+            </label>
+            <div className="space-y-1">
+              <label className="flex items-start gap-2 cursor-pointer">
+                <input type="checkbox" checked={formData.eric_wos === 'ใช่'} onChange={(e) => handleInputChange('eric_wos', e.target.checked ? 'ใช่' : '')} className="mt-0.5 w-4 h-4 rounded border-[#E0E0E0] text-[#0066CC] focus:ring-[#0066CC]" />
+                <span className="text-xs text-[#333333]">ERIC Web of Science</span>
+              </label>
+              <div className="ml-6 flex flex-wrap gap-2">
+                {[
+                  { name: 'scie', label: 'SCIE' },
+                  { name: 'pubmed', label: 'Pubmed' },
+                  { name: 'scopus', label: 'Scopus' },
+                  { name: 'project_muse', label: 'Project Muse' },
+                  { name: 'ssci', label: 'SSCI' },
+                  { name: 'ahci', label: 'AHCI' },
+                ].map((item) => (
+                  <label key={item.name} className="flex items-center gap-1 cursor-pointer">
+                    <input type="checkbox" checked={formData[item.name] === 'ใช่'} onChange={(e) => handleInputChange(item.name, e.target.checked ? 'ใช่' : '')} className="w-3.5 h-3.5 rounded border-[#E0E0E0] text-[#0066CC] focus:ring-[#0066CC]" />
+                    <span className="text-[11px] text-[#666666]">{item.label}</span>
+                  </label>
+                ))}
+              </div>
+            </div>
+            <label className="flex items-start gap-2 cursor-pointer">
+              <input type="checkbox" checked={formData.jstor === 'ใช่'} onChange={(e) => handleInputChange('jstor', e.target.checked ? 'ใช่' : '')} className="mt-0.5 w-4 h-4 rounded border-[#E0E0E0] text-[#0066CC] focus:ring-[#0066CC]" />
+              <span className="text-xs text-[#333333]">JSTOR</span>
+            </label>
+            <label className="flex items-start gap-2 cursor-pointer">
+              <input type="checkbox" checked={formData.national_indexed === 'ใช่'} onChange={(e) => handleInputChange('national_indexed', e.target.checked ? 'ใช่' : '')} className="mt-0.5 w-4 h-4 rounded border-[#E0E0E0] text-[#0066CC] focus:ring-[#0066CC]" />
+              <span className="text-xs text-[#333333]">ระดับชาติ (จะต้องเป็นวารสารที่มีคุณภาพและเป็นที่ยอมรับในสาขาวิชานั้นๆ, ตีพิมพ์อย่างต่อเนื่องสม่ำเสมอ อย่างน้อย 3 ปี และมีจำนวนผู้ทรงคุณวุฒิ (peer reviewer) จากหลากหลายสถาบัน อย่างน้อย 3 คน) / กรณีผลงานเผยแพร่ก่อนวันที่ 29 เมษายน 2565 สามารถใช้ผลงานที่ตีพิมพ์ในฐานข้อมูล TCI 1 หรือ TCI 2 ได้โดยอนุโลม</span>
+            </label>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+return (
+  <div key={section.heading.name} className="bg-white rounded-lg p-4 shadow-sm border border-[#E0E0E0] space-y-4">
+    <h3 className="text-sm font-bold text-[#0066CC] flex items-center gap-2 border-b border-[#E0E0E0] pb-2">
+      <i className="fa-solid fa-circle text-[6px]"></i>
 
+      {formData.intl_approved === 'ใช่' && (
+      <div className="ml-6 pl-3 border-l-2 border-[#0066CC]/30 space-y-2">
+        <label className="flex items-start gap-2 cursor-pointer">
+          <input type="checkbox" checked={formData.mathscinet === 'ใช่'} onChange={(e) => handleInputChange('mathscinet', e.target.checked ? 'ใช่' : '')} className="mt-0.5 w-4 h-4 rounded border-[#E0E0E0] text-[#0066CC] focus:ring-[#0066CC]" />
+          <span className="text-xs text-[#333333]">MathsciNet</span>
+        </label>
+        <div className="space-y-1">
+          <label className="flex items-start gap-2 cursor-pointer">
+            <input type="checkbox" checked={formData.eric_wos === 'ใช่'} onChange={(e) => handleInputChange('eric_wos', e.target.checked ? 'ใช่' : '')} className="mt-0.5 w-4 h-4 rounded border-[#E0E0E0] text-[#0066CC] focus:ring-[#0066CC]" />
+            <span className="text-xs text-[#333333]">ERIC Web of Science</span>
+          </label>
+        ))}
+          <div className="ml-6 flex flex-wrap gap-2">
+            {[
+              { name: 'scie', label: 'SCIE' },
+              { name: 'pubmed', label: 'Pubmed' },
+              { name: 'scopus', label: 'Scopus' },
+              { name: 'project_muse', label: 'Project Muse' },
+              { name: 'ssci', label: 'SSCI' },
+              { name: 'ahci', label: 'AHCI' },
+            ].map((item) => (
+              <label key={item.name} className="flex items-center gap-1 cursor-pointer">
+                <input type="checkbox" checked={formData[item.name] === 'ใช่'} onChange={(e) => handleInputChange(item.name, e.target.checked ? 'ใช่' : '')} className="w-3.5 h-3.5 rounded border-[#E0E0E0] text-[#0066CC] focus:ring-[#0066CC]" />
+                <span className="text-[11px] text-[#666666]">{item.label}</span>
+              </label>
+            ))}
+          </div>
+        </div>
+        <label className="flex items-start gap-2 cursor-pointer">
+          <input type="checkbox" checked={formData.jstor === 'ใช่'} onChange={(e) => handleInputChange('jstor', e.target.checked ? 'ใช่' : '')} className="mt-0.5 w-4 h-4 rounded border-[#E0E0E0] text-[#0066CC] focus:ring-[#0066CC]" />
+          <span className="text-xs text-[#333333]">JSTOR</span>
+        </label>
+      </div>
+    </div>
+    )}
+    <label className="flex items-start gap-2 cursor-pointer">
+      <input type="checkbox" checked={formData.jstor === 'ใช่'} onChange={(e) => handleInputChange('jstor', e.target.checked ? 'ใช่' : '')} className="mt-0.5 w-4 h-4 rounded border-[#E0E0E0] text-[#0066CC] focus:ring-[#0066CC]" />
+      <span className="text-xs text-[#333333]">JSTOR</span>
+    </label>
+    <label className="flex items-start gap-2 cursor-pointer">
+      <input type="checkbox" checked={formData.national_indexed === 'ใช่'} onChange={(e) => handleInputChange('national_indexed', e.target.checked ? 'ใช่' : '')} className="mt-0.5 w-4 h-4 rounded border-[#E0E0E0] text-[#0066CC] focus:ring-[#0066CC]" />
+      <span className="text-xs text-[#333333]">ระดับชาติ (จะต้องเป็นวารสารที่มีคุณภาพและเป็นที่ยอมรับในสาขาวิชานั้นๆ, ตีพิมพ์อย่างต่อเนื่องสม่ำเสมอ อย่างน้อย 3 ปี และมีจำนวนผู้ทรงคุณวุฒิ (peer reviewer) จากหลากหลายสถาบัน อย่างน้อย 3 คน) / กรณีผลงานเผยแพร่ก่อนวันที่ 29 เมษายน 2565 สามารถใช้ผลงานที่ตีพิมพ์ในฐานข้อมูล TCI 1 หรือ TCI 2 ได้โดยอนุโลม</span>
+    </label>
+  </div>
 export default VCForm;
