@@ -1,0 +1,568 @@
+{
+  "claims": {
+    "university": {
+      "mandatory": true,
+      "sd": true,
+      "display": [
+        {
+          "name": "สังกัด",
+          "locale": "th"
+        }
+      ]
+    },
+    "department": {
+      "mandatory": true,
+      "sd": true,
+      "display": [
+        {
+          "name": "สาขา",
+          "locale": "th"
+        }
+      ]
+    },
+    "faculty": {
+      "mandatory": true,
+      "sd": true,
+      "display": [
+        {
+          "name": "คณะ",
+          "locale": "th"
+        }
+      ]
+    },
+    "educational_record": {
+      "mandatory": true,
+      "sd": true,
+      "display": [
+        {
+          "name": "ประวัติการศึกษา",
+          "locale": "th"
+        }
+      ]
+    },
+    "official_history": {
+      "mandatory": true,
+      "sd": true,
+      "display": [
+        {
+          "name": "ประวัติงานราชการ",
+          "locale": "th"
+        }
+      ]
+    },
+    "background_duties": {
+      "mandatory": true,
+      "sd": true,
+      "display": [
+        {
+          "name": "ภาระงานย้อนหลัง",
+          "locale": "th"
+        }
+      ]
+    },
+    "current_position": {
+      "mandatory": false,
+      "sd": true,
+      "display": [
+        {
+          "name": "ปัจจุบันดำรงตำแหน่ง",
+          "locale": "th"
+        }
+      ],
+      "fields": {
+        "position": {
+          "mandatory": false,
+          "sd": true,
+          "display": [
+            {
+              "name": "ตำแหน่ง",
+              "locale": "th"
+            }
+          ]
+        },
+        "level": {
+          "mandatory": false,
+          "sd": true,
+          "display": [
+            {
+              "name": "ระดับ",
+              "locale": "th"
+            }
+          ]
+        },
+        "step": {
+          "mandatory": false,
+          "sd": true,
+          "display": [
+            {
+              "name": "ขั้น",
+              "locale": "th"
+            }
+          ]
+        },
+        "salary": {
+          "mandatory": false,
+          "sd": true,
+          "display": [
+            {
+              "name": "บาท",
+              "locale": "th"
+            }
+          ]
+        }
+      }
+    },
+    "appointed_lecturer": {
+      "mandatory": false,
+      "sd": true,
+      "display": [
+        {
+          "name": "ได้รับแต่งตั้งให้ดำรงตำแหน่งอาจารย์",
+          "locale": "th"
+        }
+      ],
+      "fields": {
+        "appointment_date": {
+          "mandatory": false,
+          "sd": true,
+          "display": [
+            {
+              "name": "เมื่อวันที่ เดือน พ.ศ.",
+              "locale": "th"
+            }
+          ]
+        }
+      }
+    },
+    "appointed_assistant_professor": {
+      "mandatory": false,
+      "sd": true,
+      "display": [
+        {
+          "name": "ได้รับการแต่งตั้งเป็นผู้ช่วยศาสตราจารย์",
+          "locale": "th"
+        }
+      ],
+      "fields": {
+        "field_of_study": {
+          "mandatory": false,
+          "sd": true,
+          "display": [
+            {
+              "name": "ในสาขาวิชา",
+              "locale": "th"
+            }
+          ]
+        },
+        "appointment_date": {
+          "mandatory": false,
+          "sd": true,
+          "display": [
+            {
+              "name": "เมื่อวันที่ เดือน พ.ศ.",
+              "locale": "th"
+            }
+          ]
+        }
+      }
+    },
+    "appointed_associate_professor": {
+      "mandatory": false,
+      "sd": true,
+      "display": [
+        {
+          "name": "ได้รับการแต่งตั้งเป็นรองศาสตราจารย์",
+          "locale": "th"
+        }
+      ],
+      "fields": {
+        "field_of_study": {
+          "mandatory": false,
+          "sd": true,
+          "display": [
+            {
+              "name": "ในสาขาวิชา",
+              "locale": "th"
+            }
+          ]
+        },
+        "appointment_date": {
+          "mandatory": false,
+          "sd": true,
+          "display": [
+            {
+              "name": "เมื่อวันที่ เดือน พ.ศ.",
+              "locale": "th"
+            }
+          ]
+        }
+      }
+    },
+    "years_of_service": {
+      "mandatory": false,
+      "sd": true,
+      "display": [
+        {
+          "name": "อายุราชการ",
+          "locale": "th"
+        }
+      ],
+      "fields": {
+        "years": {
+          "mandatory": false,
+          "sd": true,
+          "display": [
+            {
+              "name": "ปี",
+              "locale": "th"
+            }
+          ]
+        },
+        "months": {
+          "mandatory": false,
+          "sd": true,
+          "display": [
+            {
+              "name": "เดือน",
+              "locale": "th"
+            }
+          ]
+        }
+      }
+    },
+    "other_positions": {
+      "mandatory": false,
+      "sd": true,
+      "display": [
+        {
+          "name": "ตำแหน่งอื่น ๆ",
+          "locale": "th"
+        }
+      ]
+    },
+    "teaching_work": {
+      "mandatory": false,
+      "sd": true,
+      "display": [
+        {
+          "name": "งานสอน",
+          "locale": "th"
+        }
+      ]
+    },
+    "lectures_practical_sessions": {
+      "mandatory": false,
+      "sd": true,
+      "display": [
+        {
+          "name": "บรรยาย และปฏิบัติการ",
+          "locale": "th"
+        }
+      ],
+      "fields": {
+        "level_curriculum": {
+          "mandatory": false,
+          "sd": true,
+          "display": [
+            {
+              "name": "ระดับ/หลักสูตร",
+              "locale": "th"
+            }
+          ]
+        },
+        "subject_taught": {
+          "mandatory": false,
+          "sd": true,
+          "display": [
+            {
+              "name": "รายวิชาที่สอน",
+              "locale": "th"
+            }
+          ]
+        },
+        "name_code": {
+          "mandatory": false,
+          "sd": true,
+          "display": [
+            {
+              "name": "ชื่อ/รหัส",
+              "locale": "th"
+            }
+          ]
+        },
+        "credits": {
+          "mandatory": false,
+          "sd": true,
+          "display": [
+            {
+              "name": "หน่วยกิต",
+              "locale": "th"
+            }
+          ]
+        },
+        "theory_hours": {
+          "mandatory": false,
+          "sd": true,
+          "display": [
+            {
+              "name": "ทฤษฎี",
+              "locale": "th"
+            }
+          ]
+        },
+        "practice_hours": {
+          "mandatory": false,
+          "sd": true,
+          "display": [
+            {
+              "name": "ปฏิบัติ",
+              "locale": "th"
+            }
+          ]
+        }
+      }
+    },
+    "thesis_supervision": {
+      "mandatory": false,
+      "sd": true,
+      "display": [
+        {
+          "name": "งานควบคุมวิทยานิพนธ์",
+          "locale": "th"
+        }
+      ]
+    },
+    "doctoral_students_supervision": {
+      "mandatory": false,
+      "sd": true,
+      "display": [
+        {
+          "name": "นิสิตปริญญาเอก",
+          "locale": "th"
+        }
+      ],
+      "fields": {
+        "field": {
+          "mandatory": false,
+          "sd": true,
+          "display": [
+            {
+              "name": "สาขา",
+              "locale": "th"
+            }
+          ]
+        },
+        "number_of_people": {
+          "mandatory": false,
+          "sd": true,
+          "display": [
+            {
+              "name": "จำนวนกี่คน",
+              "locale": "th"
+            }
+          ]
+        },
+        "average_hours_per_week": {
+          "mandatory": false,
+          "sd": true,
+          "display": [
+            {
+              "name": "เฉลี่ย ชั่วโมง/สัปดาห์",
+              "locale": "th"
+            }
+          ]
+        }
+      }
+    },
+    "masters_students_supervision": {
+      "mandatory": false,
+      "sd": true,
+      "display": [
+        {
+          "name": "นิสิตปริญญาโท",
+          "locale": "th"
+        }
+      ],
+      "fields": {
+        "field": {
+          "mandatory": false,
+          "sd": true,
+          "display": [
+            {
+              "name": "สาขา",
+              "locale": "th"
+            }
+          ]
+        },
+        "number_of_people": {
+          "mandatory": false,
+          "sd": true,
+          "display": [
+            {
+              "name": "จำนวน คน",
+              "locale": "th"
+            }
+          ]
+        },
+        "average_hours_per_week": {
+          "mandatory": false,
+          "sd": true,
+          "display": [
+            {
+              "name": "เฉลี่ย ชั่วโมง/สัปดาห์",
+              "locale": "th"
+            }
+          ]
+        }
+      }
+    },
+    "research_work": {
+      "mandatory": false,
+      "sd": true,
+      "display": [
+        {
+          "name": "งานวิจัย",
+          "locale": "th"
+        }
+      ]
+    },
+    "research_graduation": {
+      "mandatory": false,
+      "sd": true,
+      "display": [
+        {
+          "name": "งานวิจัยที่เสนอเพื่อจบการศึกษา/วิทยานิพนธ์",
+          "locale": "th"
+        }
+      ],
+      "fields": {
+        "title": {
+          "mandatory": false,
+          "sd": true,
+          "display": [
+            {
+              "name": "ชื่อเรื่อง",
+              "locale": "th"
+            }
+          ]
+        },
+        "published_in": {
+          "mandatory": false,
+          "sd": true,
+          "display": [
+            {
+              "name": "ตีพิมพ์ใน",
+              "locale": "th"
+            }
+          ]
+        }
+      }
+    },
+    "research_during_work": {
+      "mandatory": false,
+      "sd": true,
+      "display": [
+        {
+          "name": "งานวิจัยที่ได้ดำเนินการระหว่างปฏิบัติงาน",
+          "locale": "th"
+        }
+      ]
+    },
+    "academic_service_work": {
+      "mandatory": false,
+      "sd": true,
+      "display": [
+        {
+          "name": "งานบริการทางวิชาการ",
+          "locale": "th"
+        }
+      ],
+      "fields": {
+        "type_of_activity": {
+          "mandatory": false,
+          "sd": true,
+          "display": [
+            {
+              "name": "ระบุประเภทของกิจกรรม",
+              "locale": "th"
+            }
+          ]
+        },
+        "time_spent_per_week": {
+          "mandatory": false,
+          "sd": true,
+          "display": [
+            {
+              "name": "ปริมาณเวลาที่ใช้ต่อสัปดาห์",
+              "locale": "th"
+            }
+          ]
+        }
+      }
+    },
+    "administrative_work": {
+      "mandatory": false,
+      "sd": true,
+      "display": [
+        {
+          "name": "งานบริหาร",
+          "locale": "th"
+        }
+      ],
+      "fields": {
+        "responsibility": {
+          "mandatory": false,
+          "sd": true,
+          "display": [
+            {
+              "name": "ระบุงานบริหารที่มีส่วนรับผิดชอบโดยตรง",
+              "locale": "th"
+            }
+          ]
+        },
+        "time_spent_per_week": {
+          "mandatory": false,
+          "sd": true,
+          "display": [
+            {
+              "name": "ปริมาณเวลาที่ใช้ต่อสัปดาห์",
+              "locale": "th"
+            }
+          ]
+        }
+      }
+    },
+    "other_related_work": {
+      "mandatory": false,
+      "sd": true,
+      "display": [
+        {
+          "name": "งานอื่นๆที่เกี่ยวข้อง",
+          "locale": "th"
+        }
+      ],
+      "fields": {
+        "type_of_work": {
+          "mandatory": false,
+          "sd": true,
+          "display": [
+            {
+              "name": "ระบุประเภทของงาน",
+              "locale": "th"
+            }
+          ]
+        },
+        "time_spent_per_week": {
+          "mandatory": false,
+          "sd": true,
+          "display": [
+            {
+              "name": "ปริมาณเวลาที่ใช้ต่อสัปดาห์",
+              "locale": "th"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,842 @@
+{
+  "claims": {
+    "academic_works": {
+      "mandatory": false,
+      "sd": true,
+      "display": [
+        {
+          "name": "ผลงานทางวิชาการ",
+          "locale": "th"
+        }
+      ]
+    },
+    "academic_works_assistant_professor": {
+      "mandatory": false,
+      "sd": true,
+      "display": [
+        {
+          "name": "ผลงานทางวิชาการเพื่อประกอบการพิจารณาตำแหน่งผู้ช่วยศาสตราจารย์",
+          "locale": "th"
+        }
+      ]
+    },
+    "academic_works_associate_professor": {
+      "mandatory": false,
+      "sd": true,
+      "display": [
+        {
+          "name": "ผลงานทางวิชาการเพื่อประกอบการพิจารณาแต่งตั้งเป็นรองศาสตราจารย์",
+          "locale": "th"
+        }
+      ]
+    },
+    "academic_works_professor": {
+      "mandatory": false,
+      "sd": true,
+      "display": [
+        {
+          "name": "ผลงานทางวิชาการเพื่อประกอบการพิจารณาแต่งตั้งเป็นศาสตราจารย์",
+          "locale": "th"
+        }
+      ]
+    },
+    "research_works": {
+      "mandatory": false,
+      "sd": true,
+      "display": [
+        {
+          "name": "ผลงานวิจัย",
+          "locale": "th"
+        }
+      ],
+      "fields": {
+        "title": {
+          "mandatory": false,
+          "sd": true,
+          "display": [
+            {
+              "name": "ชื่อผลงาน",
+              "locale": "th"
+            }
+          ]
+        },
+        "never_used": {
+          "mandatory": false,
+          "sd": true,
+          "display": [
+            {
+              "name": "ไม่เคยใช้",
+              "locale": "th"
+            }
+          ]
+        },
+        "previously_used": {
+          "mandatory": false,
+          "sd": true,
+          "display": [
+            {
+              "name": "เคยใช้",
+              "locale": "th"
+            }
+          ],
+          "fields": {
+            "year_used": {
+              "mandatory": false,
+              "sd": true,
+              "display": [
+                {
+                  "name": "เมื่อปี พ.ศ.",
+                  "locale": "th"
+                }
+              ]
+            },
+            "quality_rating": {
+              "mandatory": false,
+              "sd": true,
+              "display": [
+                {
+                  "name": "ผลการพิจารณาคุณภาพอยู่ในระดับ",
+                  "locale": "th"
+                }
+              ]
+            }
+          }
+        },
+        "ownership_percentage": {
+          "mandatory": false,
+          "sd": true,
+          "display": [
+            {
+              "name": "เป็นเจ้าของผลงานร้อยละ",
+              "locale": "th"
+            }
+          ]
+        }
+      }
+    },
+    "other_academic_works": {
+      "mandatory": false,
+      "sd": true,
+      "display": [
+        {
+          "name": "ผลงานทางวิชาการในลักษณะอื่น",
+          "locale": "th"
+        }
+      ]
+    },
+    "authored_compiled_works": {
+      "mandatory": false,
+      "sd": true,
+      "display": [
+        {
+          "name": "ผลงานแต่งหรือเรียบเรียง ตำรา หนังสือ หรือบทความทางวิชาการ",
+          "locale": "th"
+        }
+      ]
+    },
+    "textbooks": {
+      "mandatory": false,
+      "sd": true,
+      "display": [
+        {
+          "name": "ตำรา",
+          "locale": "th"
+        }
+      ],
+      "fields": {
+        "used_for_teaching": {
+          "mandatory": false,
+          "sd": true,
+          "display": [
+            {
+              "name": "ใช้ประกอบการสอนรายวิชา",
+              "locale": "th"
+            }
+          ]
+        },
+        "course_code": {
+          "mandatory": false,
+          "sd": true,
+          "display": [
+            {
+              "name": "รหัส",
+              "locale": "th"
+            }
+          ]
+        }
+      }
+    },
+    "applicant_signature": {
+      "mandatory": false,
+      "sd": true,
+      "display": [
+        {
+          "name": "ลายเซ็นผู้ขอ",
+          "locale": "th"
+        }
+      ]
+    },
+    "person_signature": {
+      "mandatory": false,
+      "sd": true,
+      "display": [
+        {
+          "name": "ลายเซ็นเจ้าของประวัติ",
+          "locale": "th"
+        }
+      ]
+    },
+    "position": {
+      "mandatory": false,
+      "sd": true,
+      "display": [
+        {
+          "name": "ตำแหน่ง",
+          "locale": "th"
+        }
+      ]
+    },
+    "signing_date": {
+      "mandatory": false,
+      "sd": true,
+      "display": [
+        {
+          "name": "วันที่เซ็น",
+          "locale": "th"
+        }
+      ]
+    },
+    "applicant_status_in_work": {
+      "mandatory": false,
+      "sd": true,
+      "display": [
+        {
+          "name": "สถานะผู้ขอในผลงาน",
+          "locale": "th"
+        }
+      ]
+    },
+    "first_author": {
+      "mandatory": false,
+      "sd": true,
+      "display": [
+        {
+          "name": "ผู้ประพันธ์อันดับแรก",
+          "locale": "th"
+        }
+      ]
+    },
+    "key_intellectual_contributor": {
+      "mandatory": false,
+      "sd": true,
+      "display": [
+        {
+          "name": "ผู้มีส่วนสำคัญทางปัญญา",
+          "locale": "th"
+        }
+      ]
+    },
+    "published_author": {
+      "mandatory": false,
+      "sd": true,
+      "display": [
+        {
+          "name": "ผู้ประพันธ์บรรณกิจ",
+          "locale": "th"
+        }
+      ]
+    },
+    "work_type": {
+      "mandatory": false,
+      "sd": true,
+      "display": [
+        {
+          "name": "ประเภทของผลงาน",
+          "locale": "th"
+        }
+      ]
+    },
+    "research": {
+      "mandatory": false,
+      "sd": true,
+      "display": [
+        {
+          "name": "งานวิจัย",
+          "locale": "th"
+        }
+      ]
+    },
+    "international_level": {
+      "mandatory": false,
+      "sd": true,
+      "display": [
+        {
+          "name": "ระดับนานาชาติ",
+          "locale": "th"
+        }
+      ]
+    },
+    "national_level": {
+      "mandatory": false,
+      "sd": true,
+      "display": [
+        {
+          "name": "ระดับชาติ",
+          "locale": "th"
+        }
+      ]
+    },
+    "academic_works_for_industry": {
+      "mandatory": false,
+      "sd": true,
+      "display": [
+        {
+          "name": "ผลงานวิชาการเพื่ออุตสาหกรรม",
+          "locale": "th"
+        }
+      ]
+    },
+    "teaching_learning_development": {
+      "mandatory": false,
+      "sd": true,
+      "display": [
+        {
+          "name": "ผลงานวิชาการเพื่อพัฒนาการเรียนการสอนและการเรียนรู้",
+          "locale": "th"
+        }
+      ]
+    },
+    "public_policy_development": {
+      "mandatory": false,
+      "sd": true,
+      "display": [
+        {
+          "name": "ผลงานวิชาการเพื่อพัฒนานโยบายสาธารณะ",
+          "locale": "th"
+        }
+      ]
+    },
+    "science_technology_creative": {
+      "mandatory": false,
+      "sd": true,
+      "display": [
+        {
+          "name": "ผลงานสร้างสรรค์ด้านวิทยาศาสตร์และเทคโนโลยี",
+          "locale": "th"
+        }
+      ]
+    },
+    "dictionaries_encyclopedias": {
+      "mandatory": false,
+      "sd": true,
+      "display": [
+        {
+          "name": "พจนานุกรม สารานุกรม นามานุกรม และงานวิชาการในลักษณะเดียวกัน",
+          "locale": "th"
+        }
+      ]
+    },
+    "aesthetics_art_creative": {
+      "mandatory": false,
+      "sd": true,
+      "display": [
+        {
+          "name": "ผลงานสร้างสรรค์ด้านสุนทรียะ ศิลปะ",
+          "locale": "th"
+        }
+      ]
+    },
+    "social_service": {
+      "mandatory": false,
+      "sd": true,
+      "display": [
+        {
+          "name": "ผลงานวิชาการรับใช้สังคม",
+          "locale": "th"
+        }
+      ]
+    },
+    "case_study": {
+      "mandatory": false,
+      "sd": true,
+      "display": [
+        {
+          "name": "กรณีศึกษา",
+          "locale": "th"
+        }
+      ],
+      "fields": {
+        "case_name": {
+          "mandatory": false,
+          "sd": true,
+          "display": [
+            {
+              "name": "ชื่อเรื่อง",
+              "locale": "th"
+            }
+          ]
+        },
+        "organization": {
+          "mandatory": false,
+          "sd": true,
+          "display": [
+            {
+              "name": "องค์กร/สถาบัน",
+              "locale": "th"
+            }
+          ]
+        },
+        "year": {
+          "mandatory": false,
+          "sd": true,
+          "display": [
+            {
+              "name": "ปี พ.ศ.",
+              "locale": "th"
+            }
+          ]
+        }
+      }
+    },
+    "translation": {
+      "mandatory": false,
+      "sd": true,
+      "display": [
+        {
+          "name": "งานแปล",
+          "locale": "th"
+        }
+      ],
+      "fields": {
+        "original_title": {
+          "mandatory": false,
+          "sd": true,
+          "display": [
+            {
+              "name": "ชื่อเรื่องต้นฉบับ",
+              "locale": "th"
+            }
+          ]
+        },
+        "translated_title": {
+          "mandatory": false,
+          "sd": true,
+          "display": [
+            {
+              "name": "ชื่อเรื่องแปล",
+              "locale": "th"
+            }
+          ]
+        },
+        "target_language": {
+          "mandatory": false,
+          "sd": true,
+          "display": [
+            {
+              "name": "ภาษาแปล",
+              "locale": "th"
+            }
+          ]
+        },
+        "year": {
+          "mandatory": false,
+          "sd": true,
+          "display": [
+            {
+              "name": "ปี พ.ศ.",
+              "locale": "th"
+            }
+          ]
+        }
+      }
+    },
+    "patent": {
+      "mandatory": false,
+      "sd": true,
+      "display": [
+        {
+          "name": "สิทธิบัตร",
+          "locale": "th"
+        }
+      ],
+      "fields": {
+        "patent_type": {
+          "mandatory": false,
+          "sd": true,
+          "display": [
+            {
+              "name": "ประเภท",
+              "locale": "th"
+            }
+          ]
+        },
+        "registration_year": {
+          "mandatory": false,
+          "sd": true,
+          "display": [
+            {
+              "name": "ปีที่ได้รับการจด",
+              "locale": "th"
+            }
+          ]
+        },
+        "country_coverage": {
+          "mandatory": false,
+          "sd": true,
+          "display": [
+            {
+              "name": "ครอบคลุมประเทศ",
+              "locale": "th"
+            }
+          ]
+        }
+      }
+    },
+    "software": {
+      "mandatory": false,
+      "sd": true,
+      "display": [
+        {
+          "name": "ซอฟต์แวร์",
+          "locale": "th"
+        }
+      ],
+      "fields": {
+        "software_name": {
+          "mandatory": false,
+          "sd": true,
+          "display": [
+            {
+              "name": "ชื่อซอฟต์แวร์",
+              "locale": "th"
+            }
+          ]
+        },
+        "software_type": {
+          "mandatory": false,
+          "sd": true,
+          "display": [
+            {
+              "name": "ประเภท",
+              "locale": "th"
+            }
+          ]
+        },
+        "version": {
+          "mandatory": false,
+          "sd": true,
+          "display": [
+            {
+              "name": "เวอร์ชัน",
+              "locale": "th"
+            }
+          ]
+        }
+      }
+    },
+    "innovative_works": {
+      "mandatory": false,
+      "sd": true,
+      "display": [
+        {
+          "name": "ผลงานนวัตกรรม",
+          "locale": "th"
+        }
+      ],
+      "fields": {
+        "work_name": {
+          "mandatory": false,
+          "sd": true,
+          "display": [
+            {
+              "name": "ชื่อผลงาน",
+              "locale": "th"
+            }
+          ]
+        },
+        "work_type": {
+          "mandatory": false,
+          "sd": true,
+          "display": [
+            {
+              "name": "ประเภท",
+              "locale": "th"
+            }
+          ]
+        },
+        "year": {
+          "mandatory": false,
+          "sd": true,
+          "display": [
+            {
+              "name": "ปี พ.ศ.",
+              "locale": "th"
+            }
+          ]
+        }
+      }
+    },
+    "textbooks_books_articles": {
+      "mandatory": false,
+      "sd": true,
+      "display": [
+        {
+          "name": "ตำรา หนังสือ บทความทางวิชาการ",
+          "locale": "th"
+        }
+      ],
+      "fields": {
+        "work_type": {
+          "mandatory": false,
+          "sd": true,
+          "display": [
+            {
+              "name": "ประเภท",
+              "locale": "th"
+            }
+          ]
+        },
+        "title": {
+          "mandatory": false,
+          "sd": true,
+          "display": [
+            {
+              "name": "ชื่อเรื่อง",
+              "locale": "th"
+            }
+          ]
+        },
+        "publisher": {
+          "mandatory": false,
+          "sd": true,
+          "display": [
+            {
+              "name": "ผู้จัดพิมพ์",
+              "locale": "th"
+            }
+          ]
+        },
+        "year": {
+          "mandatory": false,
+          "sd": true,
+          "display": [
+            {
+              "name": "ปี พ.ศ.",
+              "locale": "th"
+            }
+          ]
+        }
+      }
+    },
+    "participation_details": {
+      "mandatory": false,
+      "sd": true,
+      "display": [
+        {
+          "name": "รายละเอียดการมีส่วนร่วม บทบาทและหน้าที่ ความรับผิดชอบ",
+          "locale": "th"
+        }
+      ]
+    },
+    "presentation_details": {
+      "mandatory": false,
+      "sd": true,
+      "display": [
+        {
+          "name": "รายละเอียดของการนำผลงานไปแสดง",
+          "locale": "th"
+        }
+      ]
+    },
+    "journal_publication": {
+      "mandatory": false,
+      "sd": true,
+      "display": [
+        {
+          "name": "ตีพิมพ์ในวารสาร",
+          "locale": "th"
+        }
+      ],
+      "fields": {
+        "journal_name": {
+          "mandatory": false,
+          "sd": true,
+          "display": [
+            {
+              "name": "ชื่อวารสาร",
+              "locale": "th"
+            }
+          ]
+        },
+        "impact_factor": {
+          "mandatory": false,
+          "sd": true,
+          "display": [
+            {
+              "name": "Impact Factor",
+              "locale": "th"
+            }
+          ]
+        },
+        "citations_count": {
+          "mandatory": false,
+          "sd": true,
+          "display": [
+            {
+              "name": "จำนวนครั้งของการอ้างอิง (ฐานข้อมูล)",
+              "locale": "th"
+            }
+          ]
+        }
+      }
+    },
+    "technical_report": {
+      "mandatory": false,
+      "sd": true,
+      "display": [
+        {
+          "name": "Technical Report หรือรายงานวิจัย",
+          "locale": "th"
+        }
+      ],
+      "fields": {
+        "user": {
+          "mandatory": false,
+          "sd": true,
+          "display": [
+            {
+              "name": "ผู้ใช้งาน",
+              "locale": "th"
+            }
+          ]
+        }
+      }
+    },
+    "research_presentation": {
+      "mandatory": false,
+      "sd": true,
+      "display": [
+        {
+          "name": "การเผยแพร่งานวิจัย",
+          "locale": "th"
+        }
+      ],
+      "fields": {
+        "presentation_type": {
+          "mandatory": false,
+          "sd": true,
+          "display": [
+            {
+              "name": "ประเภทการนำเสนอ",
+              "locale": "th"
+            }
+          ]
+        },
+        "count_of_presentations": {
+          "mandatory": false,
+          "sd": true,
+          "display": [
+            {
+              "name": "จำนวนครั้ง",
+              "locale": "th"
+            }
+          ]
+        }
+      }
+    },
+    "research_grants_history": {
+      "mandatory": false,
+      "sd": true,
+      "display": [
+        {
+          "name": "ประวัติการได้รับทุนวิจัย",
+          "locale": "th"
+        }
+      ],
+      "fields": {
+        "grant_type": {
+          "mandatory": false,
+          "sd": true,
+          "display": [
+            {
+              "name": "ประเภททุน",
+              "locale": "th"
+            }
+          ]
+        },
+        "funding_amount": {
+          "mandatory": false,
+          "sd": true,
+          "display": [
+            {
+              "name": "จำนวนเงิน",
+              "locale": "th"
+            }
+          ]
+        },
+        "funding_year": {
+          "mandatory": false,
+          "sd": true,
+          "display": [
+            {
+              "name": "ปีที่ได้รับ",
+              "locale": "th"
+            }
+          ]
+        }
+      }
+    },
+    "technology_transfer": {
+      "mandatory": false,
+      "sd": true,
+      "display": [
+        {
+          "name": "ได้รับการถ่ายทอดเทคโนโลยี",
+          "locale": "th"
+        }
+      ],
+      "fields": {
+        "licensing_fees": {
+          "mandatory": false,
+          "sd": true,
+          "display": [
+            {
+              "name": "ค่าธรรมเนียมใบอนุญาต (Licensing Fees) รวมเท่าใด",
+              "locale": "th"
+            }
+          ]
+        }
+      }
+    },
+    "contract_evidence": {
+      "mandatory": false,
+      "sd": true,
+      "display": [
+        {
+          "name": "แสดงหลักฐานสัญญา",
+          "locale": "th"
+        }
+      ]
+    },
+    "applicant_name_position": {
+      "mandatory": false,
+      "sd": true,
+      "display": [
+        {
+          "name": "ลงชื่อผู้ขอกำหนดตำแหน่ง",
+          "locale": "th"
+        }
+      ]
+    },
+    "applicant_signature_position": {
+      "mandatory": false,
+      "sd": true,
+      "display": [
+        {
+          "name": "ลายเซ็นผู้ขอกำหนดตำแหน่ง",
+          "locale": "th"
+        }
+      ]
+    }
+  }
+}

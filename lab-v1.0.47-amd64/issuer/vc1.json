@@ -1,0 +1,198 @@
+{
+    "claims": {
+        "personal_info": {
+            "mandatory": false,
+            "sd": true,
+            "display": [
+                {
+                    "name": "ข้อมูลส่วนบุคคล",
+                    "locale": "th"
+                }
+            ]
+        },
+        "firstname": {
+            "mandatory": true,
+            "sd": true,
+            "display": [
+                {
+                    "name": "ชื่อ",
+                    "locale": "th"
+                }
+            ]
+        },
+        "lastname": {
+            "mandatory": true,
+            "sd": true,
+            "display": [
+                {
+                    "name": "นามสกุล",
+                    "locale": "th"
+                }
+            ]
+        },
+        "date_of_birth": {
+            "type": "string",
+            "format": "date",
+            "mandatory": true,
+            "sd": true,
+            "display": [
+                {
+                    "name": "วันเกิด",
+                    "locale": "th"
+                }
+            ]
+        },
+        "age": {
+            "type": "string",
+            "format": "date",
+            "mandatory": true,
+            "sd": true,
+            "display": [
+                {
+                    "name": "อายุ",
+                    "locale": "th"
+                }
+            ]
+        },
+        "telephone": {
+            "type": "string",
+            "format": "tel",
+            "mandatory": true,
+            "sd": true,
+            "display": [
+                {
+                    "name": "เบอร์โทรศัพท์",
+                    "locale": "th"
+                }
+            ]
+        },
+        "email": {
+            "type": "string",
+            "format": "email",
+            "mandatory": true,
+            "sd": true,
+            "display": [
+                {
+                    "name": "อีเมล",
+                    "locale": "th"
+                }
+            ]
+        },
+        "university": {
+            "mandatory": false,
+            "sd": true,
+            "display": [
+                {
+                    "name": "สังกัด",
+                    "locale": "th"
+                }
+            ]
+        },
+        "department": {
+            "mandatory": false,
+            "sd": true,
+            "display": [
+                {
+                    "name": "สาขา",
+                    "locale": "th"
+                }
+            ]
+        },
+        "faculty": {
+            "mandatory": false,
+            "sd": true,
+            "display": [
+                {
+                    "name": "คณะ",
+                    "locale": "th"
+                }
+            ]
+        },
+        "higher_education": {
+            "mandatory": false,
+            "sd": true,
+            "display": [
+                {
+                    "name": "การศึกษาระดับอุดมศึกษา",
+                    "locale": "th"
+                }
+            ]
+        },
+        "phd": {
+            "mandatory": false,
+            "sd": true,
+            "display": [
+                {
+                    "name": "ปรัชญาดุษฎีบัณฑิต",
+                    "locale": "th"
+                }
+            ]
+        },
+        "phd_year_of_graduation": {
+            "type": "string",
+            "format": "date",
+            "mandatory": false,
+            "sd": true,
+            "display": [
+                {
+                    "name": "ปี พ.ศ. ที่จบ (ปรัชญาดุษฎีบัณฑิต)",
+                    "locale": "th"
+                }
+            ]
+        },
+        "master_of_science": {
+            "mandatory": false,
+            "sd": true,
+            "display": [
+                {
+                    "name": "วิทยาศาสตรมหาบัณฑิต",
+                    "locale": "th"
+                }
+            ]
+        },
+        "master_of_science_year_of_graduation": {
+            "type": "string",
+            "format": "date",
+            "mandatory": false,
+            "sd": true,
+            "display": [
+                {
+                    "name": "ปี พ.ศ. ที่จบ (วิทยาศาสตรมหาบัณฑิต)",
+                    "locale": "th"
+                }
+            ]
+        },
+        "bachelor_of_science": {
+            "mandatory": false,
+            "sd": true,
+            "display": [
+                {
+                    "name": "วิทยาศาสตรบัณฑิต",
+                    "locale": "th"
+                }
+            ]
+        },
+        "bachelor_of_science_year_of_graduation": {
+            "type": "string",
+            "format": "date",
+            "mandatory": false,
+            "sd": true,
+            "display": [
+                {
+                    "name": "ปี พ.ศ. ที่จบ (วิทยาศาสตรบัณฑิต)",
+                    "locale": "th"
+                }
+            ]
+        },
+        "institution_name_country": {
+            "mandatory": false,
+            "sd": true,
+            "display": [
+                {
+                    "name": "ชื่อสถานศึกษาและประเทศ",
+                    "locale": "th"
+                }
+            ]
+        }
+    }
+}
