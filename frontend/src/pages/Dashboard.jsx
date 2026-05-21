@@ -14,96 +14,133 @@ const Dashboard = () => {
     }
   }, [dispatch, credentials.length]);
 
-  const vcTypes = credentials.filter(c => ['VC1', 'VC2', 'VC3'].includes(c.type));
   const activeApps = [];
 
-  const formatDate = () => {
-    const d = new Date();
-    return d.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
-  };
-
-  const getStatusIcon = (status) => {
-    if (status === 'verified' || status === 'ready') return 'fa-circle-check text-success';
-    if (status === 'pending') return 'fa-clock text-warning';
-    return 'fa-circle-xmark text-error';
-  };
-
-  const getStatusText = (status) => {
-    if (status === 'verified' || status === 'ready') return 'verified';
-    if (status === 'pending') return 'pending';
-    return 'missing';
-  };
+  const activities = [
+    { icon: 'fa-circle-check', color: 'text-success', bg: 'bg-success/10', text: 'คำร้องของคุณได้รับการอนุมัติแล้ว', time: '2 วันที่แล้ว' },
+    { icon: 'fa-triangle-exclamation', color: 'text-warning', bg: 'bg-warning/10', text: 'เอกสารจะหมดอายุใน 30 วัน', time: '5 วันที่แล้ว' },
+  ];
 
   return (
     <>
-      <div className="bg-gradient-to-r from-primary to-blue-600 rounded-card p-5 text-white">
-        <p className="text-sm opacity-80">👋 สวัสดี,</p>
-        <h1 className="text-xl font-bold">{user?.name || 'ผู้ใช้งาน'}</h1>
-        <p className="text-xs opacity-70 mt-1">{user?.institution || 'Srinakharinwirot University'}</p>
-        <p className="text-xs opacity-50 mt-2">📅 {formatDate()}</p>
+      <div className="bg-gradient-to-br from-primary to-blue-700 rounded-xl shadow-lg p-5 text-white">
+        <div className="flex gap-4 mb-4">
+          <div className="w-20 h-20 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0">
+            <i className="fa-solid fa-user text-4xl text-white/80"></i>
+          </div>
+          <div className="flex-1">
+            <h2 className="text-xl font-bold">{user?.name || 'ดร.สมชาย ใจดี'}</h2>
+            <p className="text-sm text-white/80">ID: 1234567890123</p>
+            <div className="flex items-center gap-1 mt-1">
+              <i className="fa-solid fa-circle-check text-xs"></i>
+              <span className="text-xs">ยืนยันแล้ว</span>
+            </div>
+          </div>
+        </div>
+        <div className="grid grid-cols-2 gap-3 text-sm">
+          <div>
+            <p className="text-white/70 text-xs flex items-center gap-1">
+              <i className="fa-solid fa-building text-xs"></i> สังกัด
+            </p>
+            <p className="font-medium">{user?.department || 'คณะวิทยาศาสตร์'}</p>
+          </div>
+          <div>
+            <p className="text-white/70 text-xs flex items-center gap-1">
+              <i className="fa-solid fa-briefcase text-xs"></i> ตำแหน่ง
+            </p>
+            <p className="font-medium">{user?.position || 'ผู้ช่วยศาสตราจารย์'}</p>
+          </div>
+          <div>
+            <p className="text-white/70 text-xs flex items-center gap-1">
+              <i className="fa-solid fa-graduation-cap text-xs"></i> ภาควิชา
+            </p>
+            <p className="font-medium">วิทยาการคอมพิวเตอร์</p>
+          </div>
+          <div>
+            <p className="text-white/70 text-xs flex items-center gap-1">
+              <i className="fa-regular fa-calendar text-xs"></i> หมดอายุ
+            </p>
+            <p className="font-medium">15 มี.ค. 2570</p>
+          </div>
+        </div>
       </div>
 
-      <div>
-        <h2 className="text-sm font-semibold text-base-content/70 mb-2 flex items-center gap-1.5">
-          <i className="fa-solid fa-id-card"></i> หนังสือรับรอง / VERIFIABLE CREDENTIALS
-        </h2>
-        <div className="space-y-2">
-          {vcTypes.map((cred) => (
-            <Link
-              key={cred.id}
-              to="/wallet"
-              className="bg-base-100 rounded-box border border-base-300 p-3.5 flex items-center justify-between hover:shadow-sm transition-shadow"
-            >
-              <div className="flex items-center gap-3">
-                <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
-                  <i className={`fa-solid ${cred.type === 'VC1' ? 'fa-id-card' : cred.type === 'VC2' ? 'fa-briefcase' : 'fa-newspaper'} text-sm`}></i>
-                </div>
-                <div>
-                  <p className="text-sm font-medium">{cred.title}</p>
-                  <p className="text-xs text-base-content/50">{getStatusText(cred.status)}</p>
-                </div>
+      <div className="grid grid-cols-2 gap-4">
+        <Link to="/applications" className="bg-base-100 rounded-lg p-4 shadow-sm border border-base-300 hover:shadow-md transition-shadow">
+          <div className="flex flex-col items-center text-center gap-2">
+            <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+              <i className="fa-solid fa-pen text-xl text-primary"></i>
+            </div>
+            <div>
+              <p className="font-semibold text-sm text-base-content">ส่งคำร้องใหม่</p>
+              <p className="text-xs text-base-content/50">Submit Request</p>
+            </div>
+          </div>
+        </Link>
+        <Link to="/wallet" className="bg-base-100 rounded-lg p-4 shadow-sm border border-base-300 hover:shadow-md transition-shadow">
+          <div className="flex flex-col items-center text-center gap-2">
+            <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+              <i className="fa-solid fa-folder-open text-xl text-primary"></i>
+            </div>
+            <div>
+              <p className="font-semibold text-sm text-base-content">เอกสารของฉัน</p>
+              <p className="text-xs text-base-content/50">My Documents</p>
+            </div>
+          </div>
+        </Link>
+        <Link to="/applications" className="bg-base-100 rounded-lg p-4 shadow-sm border border-base-300 hover:shadow-md transition-shadow">
+          <div className="flex flex-col items-center text-center gap-2">
+            <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+              <i className="fa-solid fa-circle-check text-xl text-primary"></i>
+            </div>
+            <div>
+              <p className="font-semibold text-sm text-base-content">ตรวจสอบคำขอ</p>
+              <p className="text-xs text-base-content/50">Check Requests</p>
+            </div>
+          </div>
+        </Link>
+        <Link to="/help" className="bg-base-100 rounded-lg p-4 shadow-sm border border-base-300 hover:shadow-md transition-shadow">
+          <div className="flex flex-col items-center text-center gap-2">
+            <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+              <i className="fa-solid fa-plus text-xl text-primary"></i>
+            </div>
+            <div>
+              <p className="font-semibold text-sm text-base-content">เพิ่มเติม</p>
+              <p className="text-xs text-base-content/50">More Services</p>
+            </div>
+          </div>
+        </Link>
+      </div>
+
+      <div className="bg-base-100 rounded-lg p-4 shadow-sm border border-base-300">
+        <h3 className="font-semibold text-base-content mb-3">กิจกรรมล่าสุด</h3>
+        <div className="space-y-3">
+          {activities.map((act, i) => (
+            <div key={i} className="flex items-start gap-3">
+              <div className={`w-8 h-8 rounded-full ${act.bg} flex items-center justify-center flex-shrink-0`}>
+                <i className={`fa-solid ${act.icon} ${act.color} text-sm`}></i>
               </div>
-              <div className="flex items-center gap-2">
-                <i className={`fa-solid ${getStatusIcon(cred.status)}`}></i>
-                <i className="fa-solid fa-chevron-right text-xs text-base-content/30"></i>
+              <div className="flex-1">
+                <p className="text-sm text-base-content">{act.text}</p>
+                <p className="text-xs text-base-content/50">{act.time}</p>
               </div>
-            </Link>
+            </div>
           ))}
         </div>
       </div>
 
-      <div>
-        <h2 className="text-sm font-semibold text-base-content/70 mb-2 flex items-center gap-1.5">
-          <i className="fa-solid fa-bolt"></i> รายการด่วน / QUICK ACTIONS
-        </h2>
-        <div className="grid grid-cols-2 gap-3">
-          <Link to="/applications" className="service-card">
-            <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center text-primary text-xl">
-              <i className="fa-solid fa-file-signature"></i>
-            </div>
-            <span className="text-sm font-medium text-center">สมัครตำแหน่ง</span>
-            <span className="text-[10px] text-base-content/50 -mt-1">Apply Position</span>
-          </Link>
-          <Link to="/wallet" className="service-card">
-            <div className="w-12 h-12 bg-success/10 rounded-xl flex items-center justify-center text-success text-xl">
-              <i className="fa-solid fa-id-card"></i>
-            </div>
-            <span className="text-sm font-medium text-center">ดูวุฒิบัตร</span>
-            <span className="text-[10px] text-base-content/50 -mt-1">View Credentials</span>
-          </Link>
-        </div>
-      </div>
 
-      <div className="bg-base-100 rounded-box border border-base-300 p-4">
-        <h2 className="text-sm font-semibold text-base-content/70 mb-2 flex items-center gap-1.5">
-          <i className="fa-solid fa-chart-simple"></i> สถานะคำร้อง / APPLICATION STATUS
+      <div className="bg-base-100 rounded-lg p-4 shadow-sm border border-base-300">
+        <h2 className="text-sm font-semibold text-base-content mb-3 flex items-center gap-2">
+          <i className="fa-solid fa-file-circle-check text-sm"></i>
+          APPLICATION STATUS
         </h2>
         {activeApps.length > 0 ? (
           <div className="space-y-2">
             {activeApps.map((app) => (
               <div key={app.id} className="flex items-center justify-between p-3 bg-base-200 rounded-lg">
                 <div>
-                  <p className="text-sm font-medium">{app.position?.titleTh}</p>
+                  <p className="text-sm font-medium text-base-content">{app.position?.titleTh}</p>
                   <p className="text-xs text-base-content/60">{app.status}</p>
                 </div>
                 <span className="badge badge-warning badge-sm">กำลังดำเนินการ</span>
@@ -111,11 +148,17 @@ const Dashboard = () => {
             ))}
           </div>
         ) : (
-          <div className="text-center py-4">
-            <p className="text-sm text-base-content/50">📝 ไม่มีการสมัครงานที่กำลังดำเนินการ</p>
-            <p className="text-xs text-base-content/40">No active applications</p>
-            <Link to="/applications" className="btn btn-primary btn-sm mt-3">
-              สมัครตำแหน่งใหม่ / Apply
+          <div className="text-center py-6">
+            <div className="w-12 h-12 mx-auto mb-2 rounded-full bg-base-200 flex items-center justify-center">
+              <i className="fa-solid fa-pen text-xl text-base-content/40"></i>
+            </div>
+            <p className="text-sm text-base-content/70 mb-1">ไม่มีการสมัครงานที่กำลังดำเนินการ</p>
+            <p className="text-xs text-base-content/50 mb-3">No active applications</p>
+            <Link
+              to="/applications"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded bg-primary text-white text-sm font-medium hover:bg-primary/90 transition-colors"
+            >
+              สมัครตำแหน่งใหม่ / Apply for Position
             </Link>
           </div>
         )}
