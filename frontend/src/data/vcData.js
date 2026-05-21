@@ -5,8 +5,8 @@ const vc1Data = {
   date_of_birth: '1985-06-20',
   age: '39',
   telephone: '081-234-5678',
-  email: 'demo@swu.ac.th',
-  university: 'มหาวิทยาลัยศรีนครินทรวิโรฒ',
+  email: 'demo@grl.ac.th',
+  university: 'โกลเดน เรสสิพี แล็ป',
   department: 'ภาควิชาคณิตศาสตร์',
   faculty: 'คณะวิทยาศาสตร์',
   higher_education: 'ปริญญาเอก',
@@ -16,17 +16,17 @@ const vc1Data = {
   master_of_science_year_of_graduation: '2555',
   bachelor_of_science: 'คณิตศาสตร์',
   bachelor_of_science_year_of_graduation: '2553',
-  institution_name_country: 'มหาวิทยาลัยศรีนครินทรวิโรฒ, ประเทศไทย',
+  institution_name_country: 'โกลเดน เรสสิพี แล็ป, ประเทศไทย',
 };
 
 const vc2Data = {
-  university: 'มหาวิทยาลัยศรีนครินทรวิโรฒ',
+    university: 'โกลเดน เรสสิพี แล็ป',
   department: 'ภาควิชาคณิตศาสตร์',
   faculty: 'คณะวิทยาศาสตร์',
   educational_record: {
     level: 'ปริญญาเอก',
     field: 'คณิตศาสตร์',
-    university: 'มหาวิทยาลัยศรีนครินทรวิโรฒ',
+  university: 'โกลเดน เรสสิพี แล็ป',
     year: '2560',
   },
   official_history: [

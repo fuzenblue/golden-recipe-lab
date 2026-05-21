@@ -30,13 +30,12 @@ const Help = () => {
     <>
       <div className="flex items-center justify-between">
         <h1 className="text-lg font-bold">ช่วยเหลือ</h1>
-        <span className="text-caption text-base-content/50">Help</span>
       </div>
 
       <div className="space-y-3">
         <p className="text-sm font-semibold text-base-content/70 flex items-center gap-1.5">
           <i className="fa-solid fa-circle-question text-primary"></i>
-          คำถามที่พบบ่อย / FAQ
+          คำถามที่พบบ่อย
         </p>
         {faqs.map((faq) => (
           <div
@@ -66,7 +65,7 @@ const Help = () => {
       <div className="bg-base-100 rounded-box border border-base-300 p-4">
         <p className="text-sm font-semibold mb-3 flex items-center gap-1.5">
           <i className="fa-solid fa-headset text-primary"></i>
-          ติดต่อ / Contact
+          ติดต่อ
         </p>
         <div className="space-y-2 text-sm">
           <div className="flex items-center gap-2">
@@ -86,10 +85,10 @@ const Help = () => {
 
       <div className="bg-base-100 rounded-box border border-base-300 p-4 text-center">
         <p className="text-caption text-base-content/40">
-          <strong>Acard Wallet</strong> v1.0.0
+          <strong>Acard Academic</strong> v1.0.0
         </p>
         <p className="text-caption text-base-content/30">
-          Present by Golden Recipe Lab
+          present by golden recipe lab
         </p>
       </div>
     </>

@@ -1,21 +1,19 @@
-import { Home, Wallet, FileText, User } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 
 function BottomNav() {
   const location = useLocation();
 
   const navItems = [
-    { icon: Home, label: 'หน้าแรก', path: '/dashboard' },
-    { icon: Wallet, label: 'กระเป๋า', path: '/wallet' },
-    { icon: FileText, label: 'คำร้อง', path: '/applications' },
-    { icon: User, label: 'โปรไฟล์', path: '/profile' },
+    { icon: 'fa-house', label: 'หน้าแรก', path: '/dashboard' },
+    { icon: 'fa-wallet', label: 'กระเป๋า', path: '/wallet' },
+    { icon: 'fa-file-pen', label: 'สมัคร', path: '/applications' },
+    { icon: 'fa-user', label: 'โปรไฟล์', path: '/profile' },
   ];
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-[#E0E0E0] shadow-[0_-2px_4px_rgba(0,0,0,0.08)] z-50">
-      <div className="max-w-[432px] mx-auto grid grid-cols-4 h-14">
+    <nav className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[432px] bg-white border-t border-[#E0E0E0] shadow-[0_-2px_4px_rgba(0,0,0,0.08)] z-50">
+      <div className="grid grid-cols-4 h-14">
         {navItems.map((item) => {
-          const Icon = item.icon;
           const isActive = location.pathname === item.path;
 
           return (
@@ -28,7 +26,7 @@ function BottomNav() {
                   : 'text-[#999999] hover:text-[#0066CC]'
               }`}
             >
-              <Icon className={`w-5 h-5 ${isActive ? 'fill-current' : ''}`} />
+              <i className={`fa-solid ${item.icon} text-lg ${isActive ? '' : ''}`}></i>
               <span className="text-xs">{item.label}</span>
             </Link>
           );

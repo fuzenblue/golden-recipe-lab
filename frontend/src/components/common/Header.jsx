@@ -20,6 +20,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from '../../hooks';
 import { logout } from '../../store/slices/authSlice';
+import logoSrc from '../../logo.png';
 
 const DRAWER_WIDTH = 260;
 
@@ -63,7 +64,7 @@ const Header = () => {
               variant="body1"
               sx={{ color: 'text.secondary', fontWeight: 500 }}
             >
-              Dashboard
+              Acard Academic
             </Typography>
           </Box>
 
@@ -113,16 +114,16 @@ const Header = () => {
             </Box>
             <MenuItem onClick={handleClose}>
               <PersonIcon sx={{ mr: 1.5, fontSize: 20, color: 'text.secondary' }} />
-              Profile
+              โปรไฟล์
             </MenuItem>
             <MenuItem onClick={handleClose}>
               <SettingsIcon sx={{ mr: 1.5, fontSize: 20, color: 'text.secondary' }} />
-              Settings
+              ตั้งค่า
             </MenuItem>
             <Box sx={{ borderTop: '1px solid', borderColor: 'divider', mt: 0.5 }}>
               <MenuItem onClick={handleLogout} sx={{ color: 'error.main' }}>
                 <LogoutIcon sx={{ mr: 1.5, fontSize: 20 }} />
-                Logout
+                ออกจากระบบ
               </MenuItem>
             </Box>
           </Menu>

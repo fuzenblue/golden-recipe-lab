@@ -1,0 +1,84 @@
+{
+  "title": "VC2: ตรวจสอบประวัติการจ้างงานและภาระงาน",
+  "fields": [
+    { "type": "heading", "label": "ข้อมูลหน่วยงาน", "name": "sec_unit" },
+    { "label": "สังกัด", "type": "text", "name": "university" },
+    { "label": "คณะ", "type": "text", "name": "faculty" },
+    { "label": "สาขา", "type": "text", "name": "department" },
+
+    { "type": "heading", "label": "ประวัติการศึกษา", "name": "sec_educ" },
+    { "label": "ประวัติการศึกษา", "type": "textarea", "name": "educational_record", "required": false },
+
+    { "type": "heading", "label": "ประวัติงานราชการ", "name": "sec_official" },
+    { "label": "ประวัติงานราชการ", "type": "textarea", "name": "official_history", "required": false },
+
+    { "type": "heading", "label": "ภาระงานย้อนหลัง", "name": "sec_background" },
+    { "label": "ภาระงานย้อนหลัง", "type": "textarea", "name": "background_duties", "required": false },
+
+    { "type": "heading", "label": "ตำแหน่งปัจจุบัน", "name": "sec_curr_pos" },
+    { "label": "ตำแหน่ง", "type": "text", "name": "current_position_position", "required": false },
+    { "label": "ระดับ", "type": "text", "name": "current_position_level", "required": false },
+    { "label": "ขั้น", "type": "text", "name": "current_position_step", "required": false },
+    { "label": "เงินเดือน (บาท)", "type": "number", "name": "current_position_salary", "required": false },
+
+    { "type": "heading", "label": "การได้รับแต่งตั้ง", "name": "sec_appoint" },
+    { "label": "ได้รับแต่งตั้งให้ดำรงตำแหน่งอาจารย์ เมื่อวันที่", "type": "date", "name": "appointed_lecturer_date", "required": false },
+    { "label": "ได้รับการแต่งตั้งเป็นผู้ช่วยศาสตราจารย์ ในสาขาวิชา", "type": "text", "name": "appointed_assistant_professor_field", "required": false },
+    { "label": "ได้รับการแต่งตั้งเป็นผศ. เมื่อวันที่", "type": "date", "name": "appointed_assistant_professor_date", "required": false },
+    { "label": "ได้รับการแต่งตั้งเป็นรองศาสตราจารย์ ในสาขาวิชา", "type": "text", "name": "appointed_associate_professor_field", "required": false },
+    { "label": "ได้รับการแต่งตั้งเป็นรศ. เมื่อวันที่", "type": "date", "name": "appointed_associate_professor_date", "required": false },
+
+    { "type": "heading", "label": "อายุราชการ", "name": "sec_service" },
+    { "label": "ปี", "type": "number", "name": "years_of_service_years", "required": false },
+    { "label": "เดือน", "type": "number", "name": "years_of_service_months", "required": false },
+
+    { "type": "heading", "label": "ตำแหน่งอื่น ๆ", "name": "sec_other" },
+    { "label": "ตำแหน่งอื่น ๆ", "type": "textarea", "name": "other_positions", "required": false },
+
+    { "type": "heading", "label": "งานสอน", "name": "sec_teach" },
+    { "label": "งานสอน", "type": "textarea", "name": "teaching_work", "required": false },
+
+    { "type": "heading", "label": "บรรยายและปฏิบัติการ", "name": "sec_lectures" },
+    { "label": "ระดับ/หลักสูตร", "type": "text", "name": "lectures_level_curriculum", "required": false },
+    { "label": "รายวิชาที่สอน", "type": "text", "name": "lectures_subject_taught", "required": false },
+    { "label": "ชื่อ/รหัสวิชา", "type": "text", "name": "lectures_name_code", "required": false },
+    { "label": "หน่วยกิต", "type": "number", "name": "lectures_credits", "required": false },
+    { "label": "ทฤษฎี (ชั่วโมง)", "type": "number", "name": "lectures_theory_hours", "required": false },
+    { "label": "ปฏิบัติ (ชั่วโมง)", "type": "number", "name": "lectures_practice_hours", "required": false },
+
+    { "type": "heading", "label": "งานควบคุมวิทยานิพนธ์", "name": "sec_thesis" },
+    { "label": "งานควบคุมวิทยานิพนธ์", "type": "textarea", "name": "thesis_supervision", "required": false },
+
+    { "type": "heading", "label": "ควบคุมนิสิตปริญญาเอก", "name": "sec_doctoral" },
+    { "label": "สาขา", "type": "text", "name": "doctoral_students_field", "required": false },
+    { "label": "จำนวน (คน)", "type": "number", "name": "doctoral_students_number", "required": false },
+    { "label": "เฉลี่ย ชั่วโมง/สัปดาห์", "type": "number", "name": "doctoral_students_hours", "required": false },
+
+    { "type": "heading", "label": "ควบคุมนิสิตปริญญาโท", "name": "sec_masters" },
+    { "label": "สาขา", "type": "text", "name": "masters_students_field", "required": false },
+    { "label": "จำนวน (คน)", "type": "number", "name": "masters_students_number", "required": false },
+    { "label": "เฉลี่ย ชั่วโมง/สัปดาห์", "type": "number", "name": "masters_students_hours", "required": false },
+
+    { "type": "heading", "label": "งานวิจัย", "name": "sec_research" },
+    { "label": "งานวิจัย", "type": "textarea", "name": "research_work", "required": false },
+
+    { "type": "heading", "label": "งานวิจัยเพื่อจบการศึกษา/วิทยานิพนธ์", "name": "sec_research_grad" },
+    { "label": "ชื่อเรื่อง", "type": "text", "name": "research_graduation_title", "required": false },
+    { "label": "ตีพิมพ์ใน", "type": "text", "name": "research_graduation_published", "required": false },
+
+    { "type": "heading", "label": "งานวิจัยระหว่างปฏิบัติงาน", "name": "sec_research_work" },
+    { "label": "งานวิจัยที่ได้ดำเนินการระหว่างปฏิบัติงาน", "type": "textarea", "name": "research_during_work", "required": false },
+
+    { "type": "heading", "label": "งานบริการทางวิชาการ", "name": "sec_service" },
+    { "label": "ระบุประเภทของกิจกรรม", "type": "text", "name": "academic_service_type", "required": false },
+    { "label": "ปริมาณเวลาที่ใช้ต่อสัปดาห์", "type": "number", "name": "academic_service_hours", "required": false },
+
+    { "type": "heading", "label": "งานบริหาร", "name": "sec_admin" },
+    { "label": "ระบุงานบริหารที่มีส่วนรับผิดชอบโดยตรง", "type": "text", "name": "administrative_work_responsibility", "required": false },
+    { "label": "ปริมาณเวลาที่ใช้ต่อสัปดาห์", "type": "number", "name": "administrative_work_hours", "required": false },
+
+    { "type": "heading", "label": "งานอื่นๆ ที่เกี่ยวข้อง", "name": "sec_other_work" },
+    { "label": "ระบุประเภทของงาน", "type": "text", "name": "other_related_work_type", "required": false },
+    { "label": "ปริมาณเวลาที่ใช้ต่อสัปดาห์", "type": "number", "name": "other_related_work_hours", "required": false }
+  ]
+}

@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { walletApi } from '../../api/wallet';
+import { verifierApi } from '../../api/verifier';
 
 const demoCredentials = [
   {
@@ -39,49 +40,17 @@ const demoCredentials = [
   {
     id: 'vc3-demo',
     type: 'VC3',
-    title: 'บันทึกการสอน',
-    issuer: 'คณะวิทยาศาสตร์ มศว',
+    title: 'Applications of Machine Learning in Education',
+    issuer: 'Journal of Educational Technology',
     status: 'verified',
     issuedAt: '2024-05-15',
     claims: {
-      academicYear: '2566',
-      courses: [
-        { courseCode: 'MATH101', courseName: 'แคลคูลัส 1', credits: 3, students: 120, hours: 3, score: 4.2 },
-        { courseCode: 'MATH201', courseName: 'พีชคณิตเชิงเส้น', credits: 3, students: 80, hours: 3, score: 4.5 },
-      ],
-      totalUnits: 6,
-      teachingEvaluationScore: 4.3,
-    },
-  },
-  {
-    id: 'vc4-1-demo',
-    type: 'VC4',
-    title: 'บทความวิจัย: Machine Learning in Education',
-    issuer: 'Scopus - Elsevier',
-    status: 'verified',
-    issuedAt: '2023-06-20',
-    claims: {
       title: 'Applications of Machine Learning in Education',
       journal: 'Journal of Educational Technology',
-      DOI: '10.1234/jed.2023.001',
-      publicationDate: '2023-06-15',
-      scopusLevel: 'Q1',
-      authors: ['สมชาย ทดสอบ', 'สมหญิง ตัวอย่าง'],
-      authorPosition: 1,
-    },
-  },
-  {
-    id: 'vc5-1-demo',
-    type: 'VC5',
-    title: 'การยืนยันสัดส่วน',
-    issuer: 'สมหญิง ตัวอย่าง',
-    status: 'ready',
-    issuedAt: '2023-07-01',
-    claims: {
-      publicationTitle: 'Applications of Machine Learning in Education',
-      coAuthorName: 'สมหญิง ตัวอย่าง',
-      contributionPercentage: 60,
-      confirmedAt: '2023-07-01',
+      impactFactor: '3.5',
+      citations: 45,
+      authorPosition: 'ผู้ประพันธ์อันดับแรก',
+      ownershipPercentage: 60,
     },
   },
 ];
@@ -92,6 +61,12 @@ const initialState = {
   selectedCredential: null,
   isLoading: false,
   error: null,
+  selectedForPresentation: [],
+  vpToken: null,
+  vpStatus: 'idle',
+  vpError: null,
+  verificationResult: null,
+  oidc4vpSession: null,
 };
 
 export const fetchDemoCredentials = createAsyncThunk(
@@ -99,6 +74,45 @@ export const fetchDemoCredentials = createAsyncThunk(
   async () => {
     await new Promise((resolve) => setTimeout(resolve, 500));
     return demoCredentials;
+  }
+);
+
+export const submitOIDC4VP = createAsyncThunk(
+  'credentials/submitOIDC4VP',
+  async (_, { getState, rejectWithValue }) => {
+    try {
+      const { selectedForPresentation, items } = getState().credentials;
+      if (!selectedForPresentation.length) {
+        throw new Error('กรุณาเลือกข้อมูลที่ต้องการเปิดเผย');
+      }
+
+      const selectedCreds = items.filter((c) => selectedForPresentation.includes(c.id));
+      const step = (status, data) => ({ status, data });
+
+      const session = await verifierApi.createSession(selectedCreds.map((c) => c.type));
+      step('session_created', session);
+
+      const vpResult = await walletApi.createPresentation(selectedForPresentation);
+      const vpToken = vpResult?.vpToken || vpResult;
+      step('vp_created', vpToken);
+
+      const submission = await verifierApi.submitVPToSession(session.sessionId, vpToken);
+      step('vp_submitted', submission);
+
+      const result = await verifierApi.getVerificationResult(session.sessionId);
+      step('verified', result);
+
+      return {
+        session,
+        vpToken,
+        submission,
+        verification: result,
+      };
+    } catch (error) {
+      return rejectWithValue(
+        error.message || error.response?.data?.message || 'เกิดข้อผิดพลาดในกระบวนการ OIDC4VP'
+      );
+    }
   }
 );
 
@@ -120,6 +134,29 @@ const credentialsSlice = createSlice({
     setSelectedCredential: (state, action) => {
       state.selectedCredential = action.payload;
     },
+    toggleCredentialForPresentation: (state, action) => {
+      const id = action.payload;
+      const index = state.selectedForPresentation.indexOf(id);
+      if (index >= 0) {
+        state.selectedForPresentation.splice(index, 1);
+      } else {
+        state.selectedForPresentation.push(id);
+      }
+    },
+    selectAllForPresentation: (state) => {
+      state.selectedForPresentation = state.items.map((c) => c.id);
+    },
+    clearSelection: (state) => {
+      state.selectedForPresentation = [];
+    },
+    clearVP: (state) => {
+      state.vpToken = null;
+      state.vpStatus = 'idle';
+      state.vpError = null;
+      state.verificationResult = null;
+      state.oidc4vpSession = null;
+      state.selectedForPresentation = [];
+    },
     clearError: (state) => {
       state.error = null;
     },
@@ -140,9 +177,33 @@ const credentialsSlice = createSlice({
       .addCase(fetchDemoCredentials.fulfilled, (state, action) => {
         state.isLoading = false;
         state.items = action.payload;
+      })
+      .addCase(submitOIDC4VP.pending, (state) => {
+        state.vpStatus = 'creating_session';
+        state.vpError = null;
+        state.verificationResult = null;
+        state.vpToken = null;
+        state.oidc4vpSession = null;
+      })
+      .addCase(submitOIDC4VP.fulfilled, (state, action) => {
+        state.vpStatus = 'verified';
+        state.vpToken = action.payload.vpToken;
+        state.oidc4vpSession = action.payload.session;
+        state.verificationResult = action.payload.verification;
+      })
+      .addCase(submitOIDC4VP.rejected, (state, action) => {
+        state.vpStatus = 'failed';
+        state.vpError = action.payload;
       });
   },
 });
 
-export const { setSelectedCredential, clearError } = credentialsSlice.actions;
+export const {
+  setSelectedCredential,
+  toggleCredentialForPresentation,
+  selectAllForPresentation,
+  clearSelection,
+  clearVP,
+  clearError,
+} = credentialsSlice.actions;
 export default credentialsSlice.reducer;

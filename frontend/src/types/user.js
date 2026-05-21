@@ -5,6 +5,7 @@ export interface User {
   institution: string;
   department: string;
   position: string;
+  academicLevel: number;
   avatar?: string;
 }
 

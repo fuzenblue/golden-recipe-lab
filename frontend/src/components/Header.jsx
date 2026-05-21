@@ -42,9 +42,9 @@ const Header = () => {
                 <p className="font-semibold">{user?.name}</p>
                 <p className="text-xs text-base-content/60">{user?.email}</p>
               </li>
-              <li><a onClick={() => navigate('/settings')}><i className="fa-solid fa-user w-5"></i> Profile</a></li>
-              <li><a onClick={() => navigate('/settings')}><i className="fa-solid fa-gear w-5"></i> Settings</a></li>
-              <li><a onClick={handleLogout} className="text-error"><i className="fa-solid fa-right-from-bracket w-5"></i> Logout</a></li>
+              <li><a onClick={() => navigate('/settings')}><i className="fa-solid fa-user w-5"></i> โปรไฟล์</a></li>
+              <li><a onClick={() => navigate('/settings')}><i className="fa-solid fa-gear w-5"></i> ตั้งค่า</a></li>
+              <li><a onClick={handleLogout} className="text-error"><i className="fa-solid fa-right-from-bracket w-5"></i> ออกจากระบบ</a></li>
             </ul>
           </div>
         </div>

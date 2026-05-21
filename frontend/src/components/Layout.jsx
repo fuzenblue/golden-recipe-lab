@@ -1,13 +1,14 @@
 import { Outlet, Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from '../hooks';
 import { logout } from '../store/slices/authSlice';
+import logoSrc from '../logo.png';
 
 const bottomMenu = [
-  { path: '/dashboard', icon: 'fa-house', textTh: 'Home', textEn: 'Home' },
-  { path: '/wallet', icon: 'fa-wallet', textTh: 'Wallet', textEn: 'Wallet' },
-  { path: '/applications', icon: 'fa-file-pen', textTh: 'Apply', textEn: 'Apply' },
-  { path: '/settings', icon: 'fa-user', textTh: 'Profile', textEn: 'Profile' },
-  { path: '/help', icon: 'fa-circle-question', textTh: 'More', textEn: 'More' },
+  { path: '/dashboard', icon: 'fa-house', textTh: 'หน้าแรก' },
+  { path: '/wallet', icon: 'fa-wallet', textTh: 'กระเป๋า' },
+  { path: '/applications', icon: 'fa-file-pen', textTh: 'สมัคร' },
+  { path: '/settings', icon: 'fa-user', textTh: 'โปรไฟล์' },
+  { path: '/help', icon: 'fa-circle-question', textTh: 'เพิ่มเติม' },
 ];
 
 const Layout = () => {
@@ -28,10 +29,8 @@ const Layout = () => {
       <header className="sticky top-0 z-40 bg-base-100/95 backdrop-blur-sm border-b border-base-300">
         <div className="flex items-center justify-between px-4 h-14">
           <Link to="/dashboard" className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-              <i className="fa-solid fa-wallet text-white text-sm"></i>
-            </div>
-            <span className="font-bold text-base">Acard Wallet</span>
+            <img src={logoSrc} alt="GRL" className="w-8 h-8 object-contain rounded-lg" />
+            <span className="font-bold text-base">Acard Academic</span>
           </Link>
           <div className="flex items-center gap-2">
             <div className="dropdown dropdown-end">
@@ -54,7 +53,7 @@ const Layout = () => {
                   <p className="text-xs text-base-content/60 truncate">{user?.email}</p>
                 </li>
                 <li><a onClick={() => navigate('/settings')}><i className="fa-solid fa-user w-4"></i> โปรไฟล์</a></li>
-                <li><a onClick={() => navigate('/settings')}><i className="fa-solid fa-gear w-4"></i> Settings</a></li>
+                <li><a onClick={() => navigate('/settings')}><i className="fa-solid fa-gear w-4"></i> ตั้งค่า</a></li>
                 <li><a onClick={handleLogout} className="text-error"><i className="fa-solid fa-right-from-bracket w-4"></i> ออกจากระบบ</a></li>
               </ul>
             </div>
@@ -68,7 +67,7 @@ const Layout = () => {
         </div>
       </main>
 
-      <nav className="fixed bottom-0 left-0 right-0 max-w-mobile mx-auto bg-base-100/95 backdrop-blur-sm border-t border-base-300 z-50 shadow-[0_-2px_4px_rgba(0,0,0,0.08)]">
+      <nav className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[432px] bg-base-100/95 backdrop-blur-sm border-t border-base-300 z-50 shadow-[0_-2px_4px_rgba(0,0,0,0.08)]">
         <div className="flex justify-around items-center h-14">
           {bottomMenu.map((item) => {
             const isActive = location.pathname === item.path ||

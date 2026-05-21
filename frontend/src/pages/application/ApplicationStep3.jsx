@@ -1,13 +1,11 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import {
-  ArrowLeft, BarChart3, FileText, AlertTriangle, Building2, Edit3, Link,
-} from 'lucide-react';
 import Button from '../../components/ui/Button';
 import Checkbox from '../../components/ui/Checkbox';
 import { RadioGroup, RadioGroupItem } from '../../components/ui/RadioGroup';
 import Label from '../../components/ui/Label';
 import Textarea from '../../components/ui/Textarea';
+import userMock from '../../data/user-mock.json';
 
 function ApplicationStep3() {
   const navigate = useNavigate();
@@ -15,16 +13,22 @@ function ApplicationStep3() {
   const [hasVC3] = useState(true);
   const [selectedPublisher, setSelectedPublisher] = useState('');
   const [researchTopic, setResearchTopic] = useState('');
+  const [showModal, setShowModal] = useState(false);
   const progress = 75;
+  const vc3List = userMock.vc3;
 
   const handleNext = () => {
     if (hasVC3 && confirmed) {
-      navigate('/application/verify');
+      navigate('/applications/verify');
     }
   };
 
   const handleRequestVC3 = () => {
-    alert('VC3 request sent to publisher!');
+    setShowModal(true);
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
   };
 
   return (
@@ -35,8 +39,8 @@ function ApplicationStep3() {
             onClick={() => navigate(-1)}
             className="flex items-center gap-2 text-[#0066CC] hover:text-[#0052A3]"
           >
-            <ArrowLeft className="w-5 h-5" />
-            <span className="text-sm">กลับ / Back</span>
+            <i className="fa-solid fa-arrow-left"></i>
+            <span className="text-sm">กลับ</span>
           </button>
           <div className="text-sm text-[#999999]">{progress}%</div>
         </div>
@@ -46,7 +50,7 @@ function ApplicationStep3() {
         <div className="bg-white rounded-lg shadow-sm border border-[#E0E0E0] p-4">
           <div className="flex items-center justify-between mb-2">
             <h2 className="text-base font-semibold text-[#333333]">ขั้นตอนที่ 3/4</h2>
-            <span className="text-sm text-[#999999]">VC3: ผลงานวิชาการ</span>
+            <span className="text-sm text-[#999999]">ผลงานวิชาการ</span>
           </div>
           <div className="w-full bg-[#E0E0E0] rounded-full h-2">
             <div
@@ -61,34 +65,30 @@ function ApplicationStep3() {
             <div className="bg-white rounded-lg shadow-sm border border-[#E0E0E0] p-4">
               <div className="flex items-center justify-between mb-3">
                 <h3 className="font-semibold text-[#333333] flex items-center gap-2">
-                  <BarChart3 className="w-5 h-5" />
-                  สรุปผลงาน / Summary
+                  <i className="fa-solid fa-chart-simple"></i>
+                  สรุปผลงาน
                 </h3>
-                <span className="text-sm text-[#00AA00] font-medium">5 ผลงาน (ครบ)</span>
+                <span className="text-sm text-[#00AA00] font-medium">{vc3List.length} ผลงาน (ครบ)</span>
               </div>
-              <p className="text-xs text-[#999999] mb-4">ต้องมีอย่างน้อย 5 ผลงาน</p>
+              <p className="text-xs text-[#999999] mb-4">ต้องมีอยางนอย 5 ผลงาน</p>
 
               <div className="space-y-3">
-                {[
-                  { title: 'Deep Learning for Thai NLP', journal: 'ACM Transactions', year: '2565', impact: '3.5' },
-                  { title: 'Neural Machine Translation', journal: 'Springer Nature', year: '2564', impact: '4.2' },
-                  { title: 'BERT for Thai Language', journal: 'IEEE Access', year: '2563', impact: '3.8' },
-                  { title: 'Transformer Architecture Study', journal: 'Nature Communications', year: '2562', impact: '4.5' },
-                  { title: 'Thai Text Classification', journal: 'AI Journal', year: '2561', impact: '3.2' },
-                ].map((pub, index) => (
+                {vc3List.map((item, index) => (
                   <div
                     key={index}
                     className="p-3 bg-[#F5F5F5] rounded border border-[#E0E0E0]"
                   >
                     <div className="flex items-start justify-between mb-1">
                       <p className="text-sm font-medium text-[#333333] flex-1 flex items-start gap-2">
-                        <FileText className="w-4 h-4 flex-shrink-0 mt-0.5" />
-                        {index + 1}. &ldquo;{pub.title}&rdquo;
+                        <i className="fa-solid fa-file-lines mt-0.5"></i>
+                        {index + 1}. &ldquo;{item.research_works_title}&rdquo;
                       </p>
                       <div className="w-2 h-2 rounded-full bg-[#00AA00] flex-shrink-0 mt-1.5" />
                     </div>
-                    <p className="text-xs text-[#666666]">วารสาร: {pub.journal}</p>
-                    <p className="text-xs text-[#999999]">ปี: {pub.year} | Impact Factor: {pub.impact}</p>
+                    <p className="text-xs text-[#666666]">วารสาร: {item.journal_publication_journal_name}</p>
+                    {item.journal_publication_impact_factor && (
+                      <p className="text-xs text-[#999999]">Impact Factor: {item.journal_publication_impact_factor}</p>
+                    )}
                   </div>
                 ))}
               </div>
@@ -102,7 +102,6 @@ function ApplicationStep3() {
               />
               <label className="text-sm text-[#333333] flex-1 cursor-pointer" onClick={() => setConfirmed(!confirmed)}>
                 <span className="block">ข้าพเจ้ายืนยันว่าข้อมูลข้างต้นถูกต้อง</span>
-                <span className="text-xs text-[#999999]">I confirm the above information is correct</span>
               </label>
             </div>
 
@@ -111,32 +110,31 @@ function ApplicationStep3() {
               disabled={!confirmed}
               className="w-full bg-[#0066CC] hover:bg-[#0052A3] text-white disabled:bg-[#E0E0E0] disabled:text-[#999999] disabled:cursor-not-allowed"
             >
-              ถัดไป / Next Step →
+              ถัดไป
             </Button>
           </>
         ) : (
           <>
             <div className="bg-[#FF9900]/10 border border-[#FF9900] rounded-lg p-4">
               <div className="flex items-start gap-2 mb-3">
-                <AlertTriangle className="w-6 h-6 text-[#FF9900] flex-shrink-0" />
+                <i className="fa-solid fa-triangle-exclamation text-2xl text-[#FF9900] flex-shrink-0"></i>
                 <div>
                   <p className="font-semibold text-[#FF9900]">คุณยังไม่มี VC3</p>
-                  <p className="text-xs text-[#666666]">You don&apos;t have VC3 yet</p>
-                  <p className="text-xs text-[#999999] mt-1">กรุณาขอ VC3 จากสำนักพิมพ์เพื่อดำเนินการต่อ</p>
+                  <p className="text-xs text-[#999999] mt-1">กรุณาขอ VC3 จากสํานักพิมพเพื่อดำเนินการต่อ</p>
                 </div>
               </div>
             </div>
 
             <div className="bg-white rounded-lg shadow-sm border border-[#E0E0E0] p-4 space-y-4">
               <h3 className="font-semibold text-[#333333] flex items-center gap-2">
-                <FileText className="w-5 h-5" />
-                ขอ VC3 ใหม่ / Request New VC3
+                <i className="fa-solid fa-file-lines"></i>
+                ขอ VC3 ใหม่
               </h3>
 
               <div>
                 <Label className="text-sm font-medium text-[#333333] mb-2 flex items-center gap-2">
-                  <Building2 className="w-4 h-4" />
-                  เลือกสำนักพิมพ์ / Select Publisher
+                  <i className="fa-solid fa-building-columns"></i>
+                  เลือกสํานักพิมพ
                 </Label>
                 <RadioGroup
                   value={selectedPublisher}
@@ -156,13 +154,13 @@ function ApplicationStep3() {
 
               <div>
                 <Label className="text-sm font-medium text-[#333333] mb-2 flex items-center gap-2">
-                  <Edit3 className="w-4 h-4" />
-                  หัวข้อวิจัย / Research Topic
+                  <i className="fa-solid fa-pen"></i>
+                  หัวขอวิจัย
                 </Label>
                 <Textarea
                   value={researchTopic}
                   onChange={(e) => setResearchTopic(e.target.value)}
-                  placeholder="การประยุกต์ใช้ AI ในการศึกษา"
+                  placeholder="การประยุกตใช AI ในการศึกษา"
                   className="w-full"
                   rows={3}
                 />
@@ -170,10 +168,9 @@ function ApplicationStep3() {
 
               <div className="bg-[#E3F2FD] border border-[#0066CC]/20 rounded p-3">
                 <p className="text-xs text-[#666666] flex items-start gap-2">
-                  <Link className="w-4 h-4 flex-shrink-0" />
+                  <i className="fa-solid fa-link mt-0.5"></i>
                   VC1 จะถูกแนบโดยอัตโนมัติเพื่อยืนยันตัวตน
                 </p>
-                <p className="text-xs text-[#999999]">VC1 will be attached automatically for identity</p>
               </div>
 
               <Button
@@ -181,12 +178,38 @@ function ApplicationStep3() {
                 disabled={!selectedPublisher || !researchTopic}
                 className="w-full bg-[#0066CC] hover:bg-[#0052A3] text-white disabled:bg-[#E0E0E0] disabled:text-[#999999] disabled:cursor-not-allowed"
               >
-                <FileText className="w-4 h-4 mr-2" />
-                ขอ VC3 / Request VC3
+                <i className="fa-solid fa-file-circle-plus mr-2"></i>
+                ขอ VC3
               </Button>
             </div>
           </>
         )}
+
+      {showModal && (
+        <div
+          className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 px-4"
+          onClick={closeModal}
+        >
+          <div
+            className="bg-white rounded-xl shadow-xl p-6 w-full max-w-sm mx-auto text-center space-y-4"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="w-16 h-16 mx-auto rounded-full bg-[#00AA00]/10 flex items-center justify-center">
+              <i className="fa-solid fa-check text-3xl text-[#00AA00]"></i>
+            </div>
+            <h2 className="text-lg font-bold text-[#333333]">ส่งคำขอ VC3 สำเร็จ</h2>
+            <p className="text-sm text-[#666666]">
+              คำขอ VC3 ของคุณถูกส่งไปยังสํานักพิมพเรียบร้อยแล้ว
+            </p>
+            <button
+              onClick={closeModal}
+              className="w-full px-4 py-3 bg-[#0066CC] text-white rounded-lg font-semibold hover:bg-[#0052A3] transition"
+            >
+              รับทราบ
+            </button>
+          </div>
+        </div>
+      )}
       </div>
     </div>
   );

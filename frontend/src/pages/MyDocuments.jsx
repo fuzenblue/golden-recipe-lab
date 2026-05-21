@@ -1,5 +1,4 @@
 import BottomNav from '../components/BottomNav';
-import { ArrowLeft, Eye, Share2, Download, Clock, Plus } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 function MyDocuments() {
@@ -46,25 +45,25 @@ function MyDocuments() {
 
   const getStatusIcon = (status) => {
     switch (status) {
-      case 'verified': return '✓';
-      case 'requesting': return '⏳';
-      case 'missing': return '✗';
-      default: return '•';
+      case 'verified': return 'check';
+      case 'requesting': return 'clock';
+      case 'missing': return 'xmark';
+      default: return 'circle';
     }
   };
 
   return (
     <div className="min-h-screen bg-[#F5F5F5] pb-20">
       <header className="bg-white border-b border-[#E0E0E0] px-4 py-3 sticky top-0 z-10">
-        <div className="max-w-[432px] mx-auto flex items-center gap-3">
+        <div className="flex items-center gap-3">
           <Link to="/" className="p-1 hover:bg-[#F5F5F5] rounded-full">
-            <ArrowLeft className="w-5 h-5 text-[#333333]" />
+            <i className="fa-solid fa-arrow-left text-[#333333]"></i>
           </Link>
           <h1 className="text-lg font-semibold text-[#333333]">เอกสารของฉัน</h1>
         </div>
       </header>
 
-      <div className="max-w-[432px] mx-auto px-4 py-6">
+      <div className="px-4 py-6">
         <div className="flex gap-2 mb-4 overflow-x-auto pb-2">
           <button className="px-4 py-2 bg-[#0066CC] text-white rounded-full text-sm font-medium whitespace-nowrap">
             ทั้งหมด
@@ -94,7 +93,7 @@ function MyDocuments() {
                       className="flex items-center gap-1 text-sm font-medium"
                       style={{ color: doc.statusColor }}
                     >
-                      {getStatusIcon(doc.status)} {doc.statusText}
+                      <i className={"fa-solid fa-" + getStatusIcon(doc.status)}></i> {doc.statusText}
                     </span>
                   </div>
                   {doc.issued && (
@@ -112,21 +111,21 @@ function MyDocuments() {
               {doc.status === 'verified' ? (
                 <div className="flex gap-2">
                   <button className="flex-1 px-3 py-2 bg-[#0066CC] text-white rounded-lg text-sm font-medium hover:bg-[#0052A3] transition-colors flex items-center justify-center gap-2">
-                    <Eye className="w-4 h-4" />
+                    <i className="fa-solid fa-eye"></i>
                     ดู
                   </button>
                   <button className="px-3 py-2 bg-white border border-[#E0E0E0] text-[#333333] rounded-lg text-sm font-medium hover:bg-[#F5F5F5] transition-colors flex items-center justify-center gap-2">
-                    <Share2 className="w-4 h-4" />
+                    <i className="fa-solid fa-share-nodes"></i>
                     แชร์
                   </button>
                   <button className="px-3 py-2 bg-white border border-[#E0E0E0] text-[#333333] rounded-lg text-sm font-medium hover:bg-[#F5F5F5] transition-colors flex items-center justify-center gap-2">
-                    <Download className="w-4 h-4" />
+                    <i className="fa-solid fa-download"></i>
                   </button>
                 </div>
               ) : doc.status === 'requesting' ? (
                 <div className="flex gap-2">
                   <button className="flex-1 px-3 py-2 bg-[#FF9900] text-white rounded-lg text-sm font-medium hover:bg-[#E68A00] transition-colors flex items-center justify-center gap-2">
-                    <Clock className="w-4 h-4" />
+                    <i className="fa-solid fa-clock"></i>
                     รอดำเนินการ
                   </button>
                   <button className="px-3 py-2 bg-white border border-[#E0E0E0] text-[#333333] rounded-lg text-sm font-medium hover:bg-[#F5F5F5] transition-colors">
@@ -142,7 +141,7 @@ function MyDocuments() {
           to="/submit-request"
           className="mt-6 flex items-center justify-center gap-2 px-4 py-3 bg-white border-2 border-dashed border-[#0066CC] text-[#0066CC] rounded-lg font-semibold hover:bg-[#E3F2FD] transition-colors"
         >
-          <Plus className="w-5 h-5" />
+          <i className="fa-solid fa-plus"></i>
           เพิ่มเอกสารใหม่
         </Link>
       </div>

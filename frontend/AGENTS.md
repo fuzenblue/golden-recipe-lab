@@ -6,6 +6,8 @@
 ## improtant
 - Do not use emoji, Use icon only
 - The content within the app must be in easy-to-understand Thai and entirely in Thai.
+- our system have only 3 vc you can read all atribute in file vc*.json
+- after edit anything always check all rote can work correctly.
 
 ## Prerequisites
 - Node.js 18.x+

@@ -1,0 +1,26 @@
+{
+  "title": "VC1: ข้อมูลส่วนบุคคลและการศึกษา",
+  "fields": [
+    { "type": "heading", "label": "ข้อมูลส่วนบุคคล", "name": "sec_personal" },
+    { "label": "ชื่อ", "type": "text", "name": "firstname" },
+    { "label": "นามสกุล", "type": "text", "name": "lastname" },
+    { "label": "วันเกิด", "type": "date", "name": "date_of_birth" },
+    { "label": "อายุ", "type": "number", "name": "age" },
+    { "label": "เบอร์โทรศัพท์", "type": "tel", "name": "telephone" },
+    { "label": "อีเมล", "type": "email", "name": "email" },
+
+    { "type": "heading", "label": "สังกัด", "name": "sec_affiliation" },
+    { "label": "มหาวิทยาลัย", "type": "text", "name": "university" },
+    { "label": "คณะ", "type": "text", "name": "faculty" },
+    { "label": "สาขา", "type": "text", "name": "department" },
+
+    { "type": "heading", "label": "การศึกษาระดับอุดมศึกษา", "name": "sec_higher_edu" },
+    { "label": "ปรัชญาดุษฎีบัณฑิต (ปริญญาเอก)", "type": "text", "name": "phd", "required": false },
+    { "label": "ปี พ.ศ. ที่จบ (ปริญญาเอก)", "type": "number", "name": "phd_year_of_graduation", "required": false },
+    { "label": "วิทยาศาสตรมหาบัณฑิต (ปริญญาโท)", "type": "text", "name": "master_of_science", "required": false },
+    { "label": "ปี พ.ศ. ที่จบ (ปริญญาโท)", "type": "number", "name": "master_of_science_year_of_graduation", "required": false },
+    { "label": "วิทยาศาสตรบัณฑิต (ปริญญาตรี)", "type": "text", "name": "bachelor_of_science", "required": false },
+    { "label": "ปี พ.ศ. ที่จบ (ปริญญาตรี)", "type": "number", "name": "bachelor_of_science_year_of_graduation", "required": false },
+    { "label": "ชื่อสถานศึกษาและประเทศ", "type": "textarea", "name": "institution_name_country", "required": false }
+  ]
+}

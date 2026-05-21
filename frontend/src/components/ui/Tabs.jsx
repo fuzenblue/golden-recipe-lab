@@ -29,18 +29,15 @@ function TabsTrigger({ className = '', value, children, ...props }) {
   const isActive = ctx?.value === value;
 
   return (
-    <button
-      type="button"
-      role="tab"
-      aria-selected={isActive}
-      onClick={() => ctx?.onValueChange?.(value)}
-      className={`inline-flex h-[calc(100%-1px)] flex-1 items-center justify-center gap-1.5 rounded-xl border border-transparent px-2 py-1 text-sm font-medium whitespace-nowrap transition-[color,box-shadow] focus-visible:ring-[3px] focus-visible:outline-1 disabled:pointer-events-none disabled:opacity-50 ${
-        isActive
-          ? 'bg-card text-foreground shadow-xs'
-          : 'text-muted-foreground hover:text-foreground'
-      } ${className}`}
-      {...props}
-    >
+      <button
+        type="button"
+        role="tab"
+        aria-selected={isActive}
+        data-state={isActive ? 'active' : 'inactive'}
+        onClick={() => ctx?.onValueChange?.(value)}
+        className={`inline-flex h-[calc(100%-1px)] flex-1 items-center justify-center gap-1.5 rounded-xl border border-transparent px-2 py-1 text-sm font-medium whitespace-nowrap transition-[color,box-shadow] focus-visible:ring-[3px] focus-visible:outline-1 disabled:pointer-events-none disabled:opacity-50 ${className}`}
+        {...props}
+      >
       {children}
     </button>
   );

@@ -35,7 +35,6 @@ const TeachingRecords = () => {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-lg font-bold">ประวัติการสอน</h1>
-          <p className="text-caption text-base-content/50">Teaching Records</p>
         </div>
         <button className="btn btn-primary btn-sm">
           <i className="fa-solid fa-plus mr-1"></i>ขอประวัติ

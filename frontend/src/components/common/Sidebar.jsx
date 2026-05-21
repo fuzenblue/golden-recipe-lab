@@ -74,10 +74,10 @@ const Sidebar = () => {
           </Avatar>
           <Box>
             <Typography variant="h6" fontWeight={700} sx={{ lineHeight: 1.2 }}>
-              Acard Wallet
+              Acard Academic
             </Typography>
             <Typography variant="caption" sx={{ opacity: 0.7 }}>
-              {user?.institution || 'Researcher'}
+              {user?.institution || 'golden recipe lab'}
             </Typography>
           </Box>
         </Box>

@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Lock } from 'lucide-react';
 
 function PinVerify() {
   const navigate = useNavigate();
@@ -48,12 +47,11 @@ function PinVerify() {
       <div className="w-full max-w-[432px] space-y-6">
         <div className="text-center space-y-2">
           <div className="w-16 h-16 mx-auto rounded-full bg-[#0066CC]/10 flex items-center justify-center">
-            <Lock className="w-8 h-8 text-[#0066CC]" />
+            <i className="fa-solid fa-lock text-2xl text-[#0066CC]"></i>
           </div>
           <h1 className="text-xl font-bold text-[#333333]">
-            กรุณากรอกรหัส PIN ของคุณ
+            กรุณากรอกรหัส PIN
           </h1>
-          <p className="text-sm text-[#999999]">Enter your 8-digit PIN</p>
         </div>
 
         <div className="flex justify-center gap-2">
@@ -88,13 +86,7 @@ function PinVerify() {
               </button>
             ))}
 
-            <button
-              onClick={handleBackspace}
-              disabled={attempts === 0}
-              className="h-16 rounded-lg bg-[#F5F5F5] hover:bg-[#FF9900]/10 active:bg-[#FF9900]/20 text-2xl transition-colors flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              ⌫
-            </button>
+            <div></div>
             <button
               onClick={() => handleNumberClick('0')}
               disabled={attempts === 0}
@@ -102,9 +94,13 @@ function PinVerify() {
             >
               0
             </button>
-            <div className="h-16 rounded-lg bg-[#E0E0E0] flex items-center justify-center text-2xl text-[#999999]">
-              ✓
-            </div>
+            <button
+              onClick={handleBackspace}
+              disabled={attempts === 0}
+              className="h-16 rounded-lg bg-[#F5F5F5] hover:bg-[#FF9900]/10 active:bg-[#FF9900]/20 text-2xl transition-colors flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              <i className="fa-solid fa-delete-left"></i>
+            </button>
           </div>
         </div>
 

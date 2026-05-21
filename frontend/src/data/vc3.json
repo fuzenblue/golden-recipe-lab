@@ -1,0 +1,42 @@
+{
+  "title": "VC3: หลักฐานการมีส่วนร่วมในผลงานทางวิชาการ",
+  "fields": [
+    { "type": "heading", "label": "ชื่อผลงาน", "name": "sec_title" },
+    { "label": "ชื่อผลงาน", "type": "text", "name": "research_works_title", "required": false },
+
+    { "type": "heading", "label": "สถานะผู้ขอในผลงาน", "name": "sec_status" },
+    { "label": "ผู้ประพันธ์อันดับแรก (First author)", "type": "radio", "name": "applicant_status", "value": "first_author" },
+    { "label": "ผู้มีส่วนสำคัญทางปัญญา (Essentially intellectual contributor)", "type": "radio", "name": "applicant_status", "value": "key_intellectual_contributor" },
+    { "label": "ผู้ประพันธ์บรรณกิจ (Corresponding author)", "type": "radio", "name": "applicant_status", "value": "published_author" },
+
+    { "type": "heading", "label": "รายละเอียดของการมีส่วนร่วม", "name": "sec_involvement" },
+    { "label": "บทบาทในการมีส่วนร่วม", "type": "text", "name": "involvement_role", "required": false },
+    { "label": "รายละเอียดการมีส่วนร่วม", "type": "textarea", "name": "involvement_details", "required": false },
+    { "label": "สัดส่วนการมีส่วนร่วม (ร้อยละ)", "type": "number", "name": "involvement_percentage", "required": false },
+
+    { "type": "heading", "label": "ประเภทของผลงาน", "name": "sec_work_type" },
+    { "label": "ประเภทของผลงาน", "type": "text", "name": "work_type", "required": false },
+    { "label": "งานวิจัย", "type": "textarea", "name": "research", "required": false },
+    { "label": "ระดับนานาชาติ", "type": "checkbox", "name": "intl_approved", "required": false },
+    { "label": "MathsciNet", "type": "checkbox", "name": "mathscinet", "required": false },
+    { "label": "ERIC", "type": "checkbox", "name": "eric", "required": false },
+    { "label": "Pubmed", "type": "checkbox", "name": "pubmed", "required": false },
+    { "label": "Scopus", "type": "checkbox", "name": "scopus", "required": false },
+    { "label": "Project Muse", "type": "checkbox", "name": "project_muse", "required": false },
+    { "label": "SCIE", "type": "checkbox", "name": "scie", "required": false },
+    { "label": "SSCI", "type": "checkbox", "name": "ssci", "required": false },
+    { "label": "AHCI", "type": "checkbox", "name": "ahci", "required": false },
+    { "label": "JSTOR", "type": "checkbox", "name": "jstor", "required": false },
+    { "label": "ระดับชาติ", "type": "checkbox", "name": "national_indexed", "required": false },
+    { "label": "ผลงานวิชาการเพื่ออุตสาหกรรม", "type": "checkbox", "name": "academic_works_for_industry", "required": false },
+    { "label": "ผลงานเพื่อพัฒนาการเรียนการสอน", "type": "checkbox", "name": "teaching_learning_development", "required": false },
+    { "label": "ผลงานเพื่อพัฒนานโยบายสาธารณะ", "type": "checkbox", "name": "public_policy_development", "required": false },
+    { "label": "ผลงานสร้างสรรค์ด้านวิทยาศาสตร์และเทคโนโลยี", "type": "checkbox", "name": "science_technology_creative", "required": false },
+    { "label": "พจนานุกรม สารานุกรม นามานุกรม", "type": "checkbox", "name": "dictionaries_encyclopedias", "required": false },
+    { "label": "ผลงานสร้างสรรค์ด้านสุนทรียะ ศิลปะ", "type": "checkbox", "name": "aesthetics_art_creative", "required": false },
+    { "label": "ผลงานวิชาการรับใช้สังคม", "type": "checkbox", "name": "social_service", "required": false },
+    { "label": "ตำรา", "type": "checkbox", "name": "textbook", "required": false },
+    { "label": "หนังสือ", "type": "checkbox", "name": "book", "required": false },
+    { "label": "บทความทางวิชาการ", "type": "checkbox", "name": "academic_article", "required": false }
+  ]
+}

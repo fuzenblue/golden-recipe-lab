@@ -127,7 +127,7 @@ const Help = () => {
                 <Typography variant="h6">About</Typography>
               </Box>
               <Typography variant="body2" color="text.secondary">
-                <strong>Acard Wallet</strong> is a digital credential wallet presented by Golden Recipe Lab.
+                <strong>Acard Academic</strong> is a digital credential wallet presented by golden recipe lab.
                 Version 1.0.0
               </Typography>
             </CardContent>

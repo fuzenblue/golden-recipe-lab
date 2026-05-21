@@ -9,14 +9,14 @@ const Checkbox = forwardRef(function Checkbox({ className = '', checked, onCheck
       aria-checked={checked}
       ref={ref}
       onClick={() => onCheckedChange?.(!checked)}
-      className={`peer size-4 shrink-0 rounded-[4px] border shadow-xs transition-shadow outline-none focus-visible:ring-[3px] focus-visible:border-ring focus-visible:ring-ring/50 disabled:cursor-not-allowed disabled:opacity-50 flex items-center justify-center ${
+      className={`peer size-5 sm:size-4 flex-shrink-0 min-h-0 rounded-[4px] border shadow-xs transition-shadow outline-none focus-visible:ring-[3px] focus-visible:border-ring focus-visible:ring-ring/50 disabled:cursor-not-allowed disabled:opacity-50 flex items-center justify-center ${
         checked
           ? 'bg-[#0066CC] border-[#0066CC] text-white'
           : 'bg-white border-[#E0E0E0]'
       } ${className}`}
       {...props}
     >
-      {checked && <Check className="size-3.5" />}
+      {checked && <Check className="size-3.5 sm:size-3" />}
     </button>
   );
 });
