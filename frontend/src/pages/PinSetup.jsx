@@ -1,160 +1,136 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Lock } from 'lucide-react';
+import Button from '../components/ui/Button';
 
-const DEMO_PIN = '12345678';
-
-const PinSetup = () => {
+function PinSetup() {
   const navigate = useNavigate();
   const [pin, setPin] = useState('');
   const [confirmPin, setConfirmPin] = useState('');
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState('setup');
   const [error, setError] = useState('');
-  const inputRef = useRef(null);
 
-  useEffect(() => {
-    inputRef.current?.focus();
-  }, [step]);
-
-  const handleKeyDown = (e) => {
-    if (error) setError('');
-    if (e.key >= '0' && e.key <= '9') {
-      if (step === 1 && pin.length < 8) {
-        const newPin = pin + e.key;
-        setPin(newPin);
-        if (newPin.length === 8) {
-          setTimeout(() => setStep(2), 300);
-        }
-      } else if (step === 2 && confirmPin.length < 8) {
-        const newPin = confirmPin + e.key;
-        setConfirmPin(newPin);
-        if (newPin.length === 8) {
-          if (newPin === pin || newPin === DEMO_PIN) {
-            localStorage.setItem('userPin', pin || DEMO_PIN);
-            localStorage.setItem('hasPin', 'true');
-            navigate('/dashboard');
-          } else {
-            setError('PIN ไม่ตรงกัน กรุณาลองใหม่');
-            setConfirmPin('');
-          }
-        }
+  const handleNumberClick = (num) => {
+    const currentPin = step === 'setup' ? pin : confirmPin;
+    if (currentPin.length < 8) {
+      if (step === 'setup') {
+        setPin(currentPin + num);
+      } else {
+        setConfirmPin(currentPin + num);
       }
-    } else if (e.key === 'Backspace') {
       setError('');
-      if (step === 1) setPin(prev => prev.slice(0, -1));
-      else setConfirmPin(prev => prev.slice(0, -1));
     }
   };
 
-  const handlePinInput = (num) => {
+  const handleBackspace = () => {
+    if (step === 'setup') {
+      setPin(pin.slice(0, -1));
+    } else {
+      setConfirmPin(confirmPin.slice(0, -1));
+    }
     setError('');
-    if (step === 1 && pin.length < 8) {
-      const newPin = pin + num;
-      setPin(newPin);
-      if (newPin.length === 8) {
-        setTimeout(() => setStep(2), 300);
+  };
+
+  const handleConfirm = () => {
+    if (step === 'setup') {
+      if (pin.length === 8) {
+        setStep('confirm');
       }
-    } else if (step === 2 && confirmPin.length < 8) {
-      const newPin = confirmPin + num;
-      setConfirmPin(newPin);
-      if (newPin.length === 8) {
-        if (newPin === pin || newPin === DEMO_PIN) {
-          localStorage.setItem('userPin', pin || DEMO_PIN);
+    } else {
+      if (confirmPin.length === 8) {
+        if (pin === confirmPin) {
+          localStorage.setItem('userPin', pin);
           localStorage.setItem('hasPin', 'true');
           navigate('/dashboard');
         } else {
-          setError('PIN ไม่ตรงกัน กรุณาลองใหม่');
+          setError('รหัส PIN ไม่ตรงกัน กรุณาลองใหม่');
           setConfirmPin('');
         }
       }
     }
   };
 
-  const handleDelete = () => {
-    setError('');
-    if (step === 1) setPin(pin.slice(0, -1));
-    else setConfirmPin(confirmPin.slice(0, -1));
-  };
-
-  const currentPin = step === 1 ? pin : confirmPin;
+  const currentPin = step === 'setup' ? pin : confirmPin;
+  const isComplete = currentPin.length === 8;
 
   return (
-    <div className="min-h-screen bg-base-100 flex flex-col max-w-mobile mx-auto">
-      <input
-        ref={inputRef}
-        type="text"
-        className="absolute opacity-0 w-0 h-0"
-        onKeyDown={handleKeyDown}
-        autoFocus
-        inputMode="numeric"
-        pattern="[0-9]*"
-      />
-      <div className="flex-1 flex flex-col items-center justify-center px-8">
-        <div className="flex flex-col items-center mb-6">
-          <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-4">
-            <i className="fa-solid fa-lock text-3xl text-primary"></i>
+    <div className="min-h-screen bg-[#F5F5F5] flex flex-col items-center justify-center px-4">
+      <div className="w-full max-w-[432px] space-y-6">
+        <div className="text-center space-y-2">
+          <div className="w-16 h-16 mx-auto rounded-full bg-[#0066CC]/10 flex items-center justify-center">
+            <Lock className="w-8 h-8 text-[#0066CC]" />
           </div>
-          <h1 className="text-h3 font-bold mb-1">
-            {step === 1 ? 'ตั้งค่า PIN' : 'ยืนยัน PIN'}
+          <h1 className="text-xl font-bold text-[#333333]">
+            {step === 'setup' ? 'สร้างรหัส PIN 8 หลักของคุณ' : 'ยืนยันรหัส PIN อีกครั้ง'}
           </h1>
-          <p className="text-body-sm text-base-content/60 text-center">
-            {step === 1
-              ? 'สร้างรหัส PIN 8 หลักของคุณ\nCreate your 8-digit PIN'
-              : 'กรุณากรอกรหัส PIN อีกครั้ง\nConfirm your PIN'}
+          <p className="text-sm text-[#999999]">
+            {step === 'setup' ? 'Create your 8-digit PIN' : 'Confirm your PIN'}
           </p>
         </div>
 
-        <div className="flex gap-3 mb-6">
+        <div className="flex justify-center gap-2">
           {[...Array(8)].map((_, i) => (
             <div
               key={i}
-              className={`pin-dot ${i < currentPin.length ? 'pin-dot-filled' : 'pin-dot-empty'}`}
-            ></div>
+              className={`w-3 h-3 rounded-full border-2 transition-all ${
+                i < currentPin.length
+                  ? 'bg-[#0066CC] border-[#0066CC]'
+                  : 'bg-transparent border-[#E0E0E0]'
+              }`}
+            />
           ))}
         </div>
 
         {error && (
-          <div role="alert" className="alert alert-error mb-4 text-sm">
-            <i className="fa-solid fa-circle-exclamation"></i>
-            <span>{error}</span>
+          <div className="bg-[#CC0000]/10 border border-[#CC0000] text-[#CC0000] px-4 py-2 rounded text-sm text-center">
+            {error}
           </div>
         )}
 
-        <div className="grid grid-cols-3 gap-3 w-full max-w-xs">
-          {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((num) => (
+        <div className="bg-white rounded-lg shadow-sm border border-[#E0E0E0] p-6">
+          <div className="grid grid-cols-3 gap-4">
+            {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((num) => (
+              <button
+                key={num}
+                onClick={() => handleNumberClick(num.toString())}
+                className="h-16 rounded-lg bg-[#F5F5F5] hover:bg-[#E3F2FD] active:bg-[#0066CC]/20 text-xl font-semibold text-[#333333] transition-colors"
+              >
+                {num}
+              </button>
+            ))}
+
             <button
-              key={num}
-              onClick={() => handlePinInput(String(num))}
-              className="pin-key"
+              onClick={handleBackspace}
+              className="h-16 rounded-lg bg-[#F5F5F5] hover:bg-[#FF9900]/10 active:bg-[#FF9900]/20 text-2xl transition-colors flex items-center justify-center"
             >
-              {num}
+              ⌫
             </button>
-          ))}
-          <button
-            onClick={() => { setError(''); step === 1 ? setPin('') : setConfirmPin(''); }}
-            className="pin-key text-sm"
-          >
-            C
-          </button>
-          <button
-            onClick={() => handlePinInput('0')}
-            className="pin-key"
-          >
-            0
-          </button>
-          <button
-            onClick={handleDelete}
-            className="pin-key"
-          >
-            <i className="fa-solid fa-delete-left"></i>
-          </button>
+            <button
+              onClick={() => handleNumberClick('0')}
+              className="h-16 rounded-lg bg-[#F5F5F5] hover:bg-[#E3F2FD] active:bg-[#0066CC]/20 text-xl font-semibold text-[#333333] transition-colors"
+            >
+              0
+            </button>
+            <button
+              onClick={handleConfirm}
+              disabled={!isComplete}
+              className={`h-16 rounded-lg text-2xl transition-colors flex items-center justify-center ${
+                isComplete
+                  ? 'bg-[#00AA00] hover:bg-[#008800] text-white'
+                  : 'bg-[#E0E0E0] text-[#999999] cursor-not-allowed'
+              }`}
+            >
+              ✓
+            </button>
+          </div>
         </div>
 
-        <p className="text-xs text-base-content/40 mt-6">
-          (Demo PIN: 12345678)
+        <p className="text-center text-xs text-[#999999]">
+          Demo PIN: 12345678
         </p>
       </div>
     </div>
   );
-};
+}
 
 export default PinSetup;

@@ -45,3 +45,5 @@ coverage/
 # Playwright
 test-results/
 playwright-report/
+
+figma-design/
